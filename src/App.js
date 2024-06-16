@@ -21,15 +21,6 @@ function App() {
     },
   ]);
 
-  const addTodo = (text) => {
-    const newTodo = {
-      ...todos,
-      text,
-      id: crypto.randomUUID(),
-    };
-    setTodos([...todos, newTodo]);
-  };
-
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -57,11 +48,6 @@ function App() {
   };
 
   const [text, setText] = useState("");
-  const handleClick = (event) => {
-    setText(event);
-    addTodo(text);
-    setText("");
-  };
 
   return (
     <div className="App">
@@ -71,8 +57,8 @@ function App() {
       </div>
 
       <TodoForm
-        addTodo={addTodo}
-        handleClick={handleClick}
+        todos={todos}
+        setTodos={setTodos}
         setText={setText}
         text={text}
       />

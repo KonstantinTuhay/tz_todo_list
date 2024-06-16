@@ -22,7 +22,7 @@ const Todo = ({ todo }) => {
       );
     }
   };
-
+  //Будет использоваться, когда понадобиться кнопка (также сверху импорт и снизу дизайнерская кнопка)
   // const correctEdit = (event, id) => {
   //   setTodos((prev) =>
   //     prev.map((item) =>
@@ -51,11 +51,20 @@ const Todo = ({ todo }) => {
             todo.isCompleted ? styles.completedTodo : ""
           }`}
         >
-          <RiAppleLine />
+          <RiAppleLine className={styles.appleImage} />
           <div className={styles.todoText}>{todo.text}</div>
-          <CiEdit onClick={() => editTodo(todo.id, todo.text)} />
-          <MdDeleteOutline onClick={() => deleteTodo(todo.id)} />
-          <MdDoneOutline onClick={() => toggleTodo(todo.id)} />
+          <CiEdit
+            className={styles.editImage}
+            onClick={() => editTodo(todo.id, todo.text)}
+          />
+          <MdDeleteOutline
+            className={styles.deleteImage}
+            onClick={() => deleteTodo(todo.id)}
+          />
+          <MdDoneOutline
+            className={styles.doneImage}
+            onClick={() => toggleTodo(todo.id)}
+          />
         </div>
       )}
     </>

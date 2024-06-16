@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "./TodoForm.module.css";
 
-const TodoForm = ({ addTodo, handleClick, setText, text }) => {
+const TodoForm = ({ todos, setTodos, setText, text }) => {
+  const addTodo = (text) => {
+    const newTodo = {
+      ...todos,
+      text,
+      id: crypto.randomUUID(),
+    };
+    setTodos([...todos, newTodo]);
+  };
+
   const handleChange = (event) => {
     if (event.key === "Enter") {
       setText(event);
@@ -9,6 +18,12 @@ const TodoForm = ({ addTodo, handleClick, setText, text }) => {
       setText("");
     }
   };
+
+  // const handleClick = (event) => {
+  //   setText(event);
+  //   addTodo(text);
+  //   setText("");
+  // };
 
   return (
     <div className={styles.todoForm}>
