@@ -1,0 +1,36 @@
+.todo {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  margin: 15px 0;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #555;
+  color: black;
+  background-color: #fff;
+}
+
+.todoText {
+  width: 100%;
+  text-align: left;
+}
+
+.completedTodo {
+  color: black;
+  background-color: #58b478;
+  text-decoration: line-through;
+}
+
+.inputForChange {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  margin: 15px 0;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #555;
+  color: black;
+  background-color: #fff;
+  width: 536.8px;
+  height: 20px;
+}
