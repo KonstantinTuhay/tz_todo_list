@@ -4,6 +4,7 @@ import TodoList from "./components/Todos/TodoList";
 import "./App.css";
 import Info from "./components/Todos/Info";
 import MyContext from "./components/tools/MyContext";
+import { Link } from "react-router-dom";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -68,6 +69,8 @@ function App() {
       >
         <TodoList todos={todos} />
       </MyContext.Provider>
+
+      <Link>Log out</Link>
     </div>
   );
 }
