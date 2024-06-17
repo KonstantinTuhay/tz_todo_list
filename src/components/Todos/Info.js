@@ -4,7 +4,7 @@ import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Switch } from "antd";
 
 const Info = () => {
-  const [onTurn, setOnTurn] = useState(false);
+  // const [onTurn, setOnTurn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
