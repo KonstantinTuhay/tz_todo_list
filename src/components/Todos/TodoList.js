@@ -2,13 +2,7 @@ import React from "react";
 import Todo from "./Todo";
 import styles from "./TodoList.module.css";
 
-const TodoList = ({
-  todos,
-  deleteOneTodo,
-  showToDo,
-  addNewTodo,
-  setDelteOneTodo,
-}) => {
+const TodoList = ({ todos }) => {
   return (
     <div className={styles.TodoList}>
       {todos.length === 0 && <h2>Todo list is empty</h2>}

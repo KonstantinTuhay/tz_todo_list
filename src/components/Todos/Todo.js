@@ -6,6 +6,7 @@ import { RiAppleLine } from "react-icons/ri";
 import { MdDoneOutline } from "react-icons/md";
 import MyContext from "../tools/MyContext";
 import EditTodoLogger from "../EditTodoLogger";
+import { CiEdit } from "react-icons/ci";
 
 // import { RiCheckboxMultipleFill } from "react-icons/ri";
 
@@ -16,8 +17,9 @@ const Todo = ({ todo }) => {
   const [deleteTodo, toggleTodo, editTodo, val, setVal, setTodos] =
     useContext(MyContext);
 
-  const handleChange = (event, id) => {
+  const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
+      teachMeUseHoc();
       console.log(val);
       setTodos((prev) =>
         prev.map((item) =>
@@ -39,14 +41,13 @@ const Todo = ({ todo }) => {
     <>
       {todo.isEdit ? (
         <div>
-          <input
+          <EditLogging
+            handleChange={handleChange}
+            id={todo.id}
             className={styles.inputForChange}
             value={val}
-            onChange={(e) => {
-              setVal(e.target.value);
-            }}
-            onKeyDown={(e) => handleChange(e, todo.id)}
           />
+
           {/* <RiCheckboxMultipleFill onClick={(e) => correctEdit(e, todo.id)} /> */}
         </div>
       ) : (
@@ -58,22 +59,21 @@ const Todo = ({ todo }) => {
           <RiAppleLine className={styles.appleImage} />
           <div className={styles.todoText}>{todo.text}</div>
 
-          <EditLogging
+          {/* <EditLogging
             className={styles.editImage}
             // onClick={() => editTodo(todo.id, todo.text)}
             id={todo.id}
             text={todo.text}
             title="Изменил таску:"
-          />
-          {/* <CiEdit
+          /> */}
+          <CiEdit
             className={styles.editImage}
             onClick={() => editTodo(todo.id, todo.text)}
-          /> */}
+          />
           <DeleteLogging
             className={styles.deleteImage}
             id={todo.id}
             text={todo.text}
-            // onClick={() => deleteTodo(todo.id, todo.text)}
             title="Удалил таску:"
           />
 

@@ -29,11 +29,8 @@ function App() {
     },
   ]);
 
-  // const [showToDo, setShowToDo] = useState([]);
-  // console.log(deleteOneTodo);
-  const deleteTodo = (id, text, stringDate, title) => {
-    console.log(`${stringDate} ${title} ${text}`);
-    // setShowToDo([...showToDo, text]);
+  const deleteTodo = (id, teachMeUseHoc) => {
+    teachMeUseHoc();
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -49,12 +46,8 @@ function App() {
 
   const [val, setVal] = useState("");
 
-  const editTodo = (id, text, stringDate, title) => {
-    console.log("text");
-    console.log(`${stringDate} ${title} ${text}`);
-
+  const editTodo = (id, text) => {
     setVal(text);
-    // setShowToDo([...showToDo, text]);
 
     setTodos((prev) =>
       prev.map((todo) =>
@@ -66,7 +59,6 @@ function App() {
   const [text, setText] = useState("");
 
   const addTodo = (text) => {
-    // setShowToDo([...showToDo, text]);
     const newTodo = {
       ...todos,
       text,
@@ -104,13 +96,7 @@ function App() {
           editTodo,
         ]}
       >
-        <TodoList
-          todos={todos}
-          // showToDo={showToDo}
-          deleteTodo={deleteTodo}
-          // addNewTodo={addNewTodo}
-        />
-        {/* <LoggedTodoList /> */}
+        <TodoList todos={todos} deleteTodo={deleteTodo} />
       </MyContext.Provider>
 
       <Link>Log out</Link>

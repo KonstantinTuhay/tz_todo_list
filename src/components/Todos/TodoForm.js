@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./TodoForm.module.css";
 
-const TodoForm = ({ setText, text, addTodo, stringDate, title }) => {
+const TodoForm = ({ setText, text, addTodo, teachMeUseHoc }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
-      console.log(title, stringDate);
-
+      teachMeUseHoc();
       setText(event);
       addTodo(text);
       setText("");

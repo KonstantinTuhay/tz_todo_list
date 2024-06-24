@@ -1,24 +1,17 @@
 import React, { useContext } from "react";
 import MyContext from "./tools/MyContext";
-import { CiEdit } from "react-icons/ci";
 
 const EditTodoLogger = (props) => {
-  // console.log("--------------");
-  // console.log(props);
-  // console.log("--------------");
-
-  const [editTodo] = useContext(MyContext);
-
+  const [setVal] = useContext(MyContext);
+  console.log(props);
   return (
     <>
-      <CiEdit
+      <input
         {...props}
-        onClick={() =>
-          editTodo(props.id, props.text, props.stringDate, props.title)
-        }
-        // onClick={() =>
-        //   deleteTodo(props.id, props.text, props.stringDate, props.title)
-        // }
+        onChange={(e) => {
+          setVal(e.target.value);
+        }}
+        onKeyDown={(e) => props.handleChange(e, props.id, props.teachMeUseHoc)}
       />
     </>
   );
