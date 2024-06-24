@@ -20,9 +20,21 @@ function App() {
       isEdit: false,
       id: crypto.randomUUID(),
     },
+    {
+      text: "third todo",
+      isCompleted: false,
+      isEdit: false,
+      id: crypto.randomUUID(),
+    },
   ]);
 
+  const [deleteOneTodo, setDelteOneTodo] = useState([]);
+  // console.log(deleteOneTodo);
   const deleteTodo = (id) => {
+    setDelteOneTodo([
+      ...deleteOneTodo,
+      todos.filter((todo) => todo.id === id)[0].text,
+    ]);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -50,6 +62,17 @@ function App() {
 
   const [text, setText] = useState("");
 
+  const [addNewTodo, setAddNewTodo] = useState([]);
+  const addTodo = (text) => {
+    setAddNewTodo([...addNewTodo, text]);
+    const newTodo = {
+      ...todos,
+      text,
+      id: crypto.randomUUID(),
+    };
+    setTodos([...todos, newTodo]);
+  };
+
   return (
     <div className="App">
       <div>
@@ -62,12 +85,19 @@ function App() {
         setTodos={setTodos}
         setText={setText}
         text={text}
+        addTodo={addTodo}
       />
 
       <MyContext.Provider
         value={[deleteTodo, toggleTodo, editTodo, val, setVal, setTodos]}
       >
-        <TodoList todos={todos} />
+        <TodoList
+          todos={todos}
+          deleteOneTodo={deleteOneTodo}
+          deleteTodo={deleteTodo}
+          addNewTodo={addNewTodo}
+        />
+        {/* <LoggedTodoList /> */}
       </MyContext.Provider>
 
       <Link>Log out</Link>

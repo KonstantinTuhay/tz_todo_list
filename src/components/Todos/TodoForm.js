@@ -1,16 +1,7 @@
 import React from "react";
 import styles from "./TodoForm.module.css";
 
-const TodoForm = ({ todos, setTodos, setText, text }) => {
-  const addTodo = (text) => {
-    const newTodo = {
-      ...todos,
-      text,
-      id: crypto.randomUUID(),
-    };
-    setTodos([...todos, newTodo]);
-  };
-
+const TodoForm = ({ setText, text, addTodo }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       setText(event);
