@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styles from "./Todo.module.css";
-
+import withLogger from "../../helpers/withLogger";
+import DeleteTodoLogger from "../DeleteTodoLogger";
 import { RiAppleLine } from "react-icons/ri";
-import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { MdDoneOutline } from "react-icons/md";
 import MyContext from "../tools/MyContext";
@@ -10,6 +10,8 @@ import MyContext from "../tools/MyContext";
 // import { RiCheckboxMultipleFill } from "react-icons/ri";
 
 const Todo = ({ todo }) => {
+  const Logging = withLogger(DeleteTodoLogger);
+
   const [deleteTodo, toggleTodo, editTodo, val, setVal, setTodos] =
     useContext(MyContext);
 
@@ -57,10 +59,11 @@ const Todo = ({ todo }) => {
             className={styles.editImage}
             onClick={() => editTodo(todo.id, todo.text)}
           />
-          <MdDeleteOutline
+          <Logging
             className={styles.deleteImage}
             onClick={() => deleteTodo(todo.id)}
           />
+
           <MdDoneOutline
             className={styles.doneImage}
             onClick={() => toggleTodo(todo.id)}
