@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const withLogger = (WrappedComponent) => {
   return (props) => {
-    return <WrappedComponent {...props} />;
+    let date = new Date();
+    let stringDate = `${date.getDate()}.${
+      date.getMonth() + 1
+    }.${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+    return <WrappedComponent {...props} stringDate={stringDate} />;
   };
 };
 

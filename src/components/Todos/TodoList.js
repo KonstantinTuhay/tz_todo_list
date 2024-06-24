@@ -5,7 +5,7 @@ import styles from "./TodoList.module.css";
 const TodoList = ({
   todos,
   deleteOneTodo,
-  deleteTodo,
+  showToDo,
   addNewTodo,
   setDelteOneTodo,
 }) => {

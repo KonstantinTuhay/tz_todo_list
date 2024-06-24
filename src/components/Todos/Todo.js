@@ -61,7 +61,10 @@ const Todo = ({ todo }) => {
           />
           <Logging
             className={styles.deleteImage}
-            onClick={() => deleteTodo(todo.id)}
+            id={todo.id}
+            text={todo.text}
+            // onClick={() => deleteTodo(todo.id, todo.text)}
+            title="Удалил таску:"
           />
 
           <MdDoneOutline

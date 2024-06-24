@@ -28,13 +28,11 @@ function App() {
     },
   ]);
 
-  const [deleteOneTodo, setDelteOneTodo] = useState([]);
+  const [showToDo, setShowToDo] = useState([]);
   // console.log(deleteOneTodo);
-  const deleteTodo = (id) => {
-    setDelteOneTodo([
-      ...deleteOneTodo,
-      todos.filter((todo) => todo.id === id)[0].text,
-    ]);
+  const deleteTodo = (id, text, stringDate, title) => {
+    console.log(`${stringDate} ${title} ${text}`);
+    setShowToDo([...showToDo, text]);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -62,9 +60,8 @@ function App() {
 
   const [text, setText] = useState("");
 
-  const [addNewTodo, setAddNewTodo] = useState([]);
   const addTodo = (text) => {
-    setAddNewTodo([...addNewTodo, text]);
+    setShowToDo([...showToDo, text]);
     const newTodo = {
       ...todos,
       text,
@@ -93,9 +90,9 @@ function App() {
       >
         <TodoList
           todos={todos}
-          deleteOneTodo={deleteOneTodo}
+          showToDo={showToDo}
           deleteTodo={deleteTodo}
-          addNewTodo={addNewTodo}
+          // addNewTodo={addNewTodo}
         />
         {/* <LoggedTodoList /> */}
       </MyContext.Provider>
