@@ -3,20 +3,22 @@ import styles from "./Todo.module.css";
 import withLogger from "../../helpers/withLogger";
 import DeleteTodoLogger from "../DeleteTodoLogger";
 import { RiAppleLine } from "react-icons/ri";
-import { CiEdit } from "react-icons/ci";
 import { MdDoneOutline } from "react-icons/md";
 import MyContext from "../tools/MyContext";
+import EditTodoLogger from "../EditTodoLogger";
 
 // import { RiCheckboxMultipleFill } from "react-icons/ri";
 
 const Todo = ({ todo }) => {
-  const Logging = withLogger(DeleteTodoLogger);
+  const DeleteLogging = withLogger(DeleteTodoLogger);
+  const EditLogging = withLogger(EditTodoLogger);
 
   const [deleteTodo, toggleTodo, editTodo, val, setVal, setTodos] =
     useContext(MyContext);
 
   const handleChange = (event, id) => {
     if (event.key === "Enter") {
+      console.log(val);
       setTodos((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, text: val, isEdit: false } : item
@@ -55,11 +57,19 @@ const Todo = ({ todo }) => {
         >
           <RiAppleLine className={styles.appleImage} />
           <div className={styles.todoText}>{todo.text}</div>
-          <CiEdit
+
+          <EditLogging
+            className={styles.editImage}
+            // onClick={() => editTodo(todo.id, todo.text)}
+            id={todo.id}
+            text={todo.text}
+            title="Изменил таску:"
+          />
+          {/* <CiEdit
             className={styles.editImage}
             onClick={() => editTodo(todo.id, todo.text)}
-          />
-          <Logging
+          /> */}
+          <DeleteLogging
             className={styles.deleteImage}
             id={todo.id}
             text={todo.text}

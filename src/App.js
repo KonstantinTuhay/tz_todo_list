@@ -5,6 +5,7 @@ import "./App.css";
 import Info from "./components/Todos/Info";
 import MyContext from "./components/tools/MyContext";
 import { Link } from "react-router-dom";
+import withLogger from "./helpers/withLogger";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -28,11 +29,11 @@ function App() {
     },
   ]);
 
-  const [showToDo, setShowToDo] = useState([]);
+  // const [showToDo, setShowToDo] = useState([]);
   // console.log(deleteOneTodo);
   const deleteTodo = (id, text, stringDate, title) => {
     console.log(`${stringDate} ${title} ${text}`);
-    setShowToDo([...showToDo, text]);
+    // setShowToDo([...showToDo, text]);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -48,8 +49,12 @@ function App() {
 
   const [val, setVal] = useState("");
 
-  const editTodo = (id, text) => {
+  const editTodo = (id, text, stringDate, title) => {
+    console.log("text");
+    console.log(`${stringDate} ${title} ${text}`);
+
     setVal(text);
+    // setShowToDo([...showToDo, text]);
 
     setTodos((prev) =>
       prev.map((todo) =>
@@ -61,7 +66,7 @@ function App() {
   const [text, setText] = useState("");
 
   const addTodo = (text) => {
-    setShowToDo([...showToDo, text]);
+    // setShowToDo([...showToDo, text]);
     const newTodo = {
       ...todos,
       text,
@@ -70,6 +75,8 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  const AddLogging = withLogger(TodoForm);
+
   return (
     <div className="App">
       <div>
@@ -77,20 +84,29 @@ function App() {
         <Info />
       </div>
 
-      <TodoForm
+      <AddLogging
         todos={todos}
         setTodos={setTodos}
         setText={setText}
         text={text}
         addTodo={addTodo}
+        title="Добавил таску:"
       />
 
       <MyContext.Provider
-        value={[deleteTodo, toggleTodo, editTodo, val, setVal, setTodos]}
+        value={[
+          deleteTodo,
+          toggleTodo,
+          editTodo,
+          val,
+          setVal,
+          setTodos,
+          editTodo,
+        ]}
       >
         <TodoList
           todos={todos}
-          showToDo={showToDo}
+          // showToDo={showToDo}
           deleteTodo={deleteTodo}
           // addNewTodo={addNewTodo}
         />
