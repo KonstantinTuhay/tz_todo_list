@@ -77,7 +77,6 @@ function App() {
         <h1>Your Todo App</h1>
         <Info />
       </div>
-
       <AddLogging
         todos={todos}
         setTodos={setTodos}
@@ -87,7 +86,6 @@ function App() {
         title="Добавил таску:"
         // onChange={(event) => setText(event.target.value)}
       />
-
       <MyContext.Provider
         value={[
           deleteTodo,
@@ -101,12 +99,11 @@ function App() {
       >
         <TodoList todos={todos} deleteTodo={deleteTodo} />
       </MyContext.Provider>
-      <Routes>
-        <Route path="/authorization" element={<LoginUsers />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-
-      <Link to="/authorization">Log out</Link>
+      {/* <Routes>
+        <Route path="/" element={<LoginUsers />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes> */}
+      {/* <Link to="/authorization">Log out</Link> */}
     </div>
   );
 }
