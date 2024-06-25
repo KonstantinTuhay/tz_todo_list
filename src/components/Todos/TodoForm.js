@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./TodoForm.module.css";
 
-const TodoForm = ({ setText, text, addTodo, teachMeUseHoc }) => {
+const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
@@ -22,8 +22,9 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc }) => {
       <input
         placeholder="Enter new todo"
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        // onChange={(event) => setText(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
+        onChange={onChange}
       />
       {/* <button onClick={handleClick}>Add</button> */}
     </div>

@@ -83,6 +83,7 @@ function App() {
         text={text}
         addTodo={addTodo}
         title="Добавил таску:"
+        onChange={(event) => setText(event.target.value)}
       />
 
       <MyContext.Provider

@@ -3,14 +3,14 @@ import MyContext from "./tools/MyContext";
 
 const EditTodoLogger = (props) => {
   const [setVal] = useContext(MyContext);
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <input
         {...props}
-        onChange={(e) => {
-          setVal(e.target.value);
-        }}
+        // onChange={(e) => {
+        //   setVal(e.target.value);
+        // }}
         onKeyDown={(e) => props.handleChange(e, props.id, props.teachMeUseHoc)}
       />
     </>

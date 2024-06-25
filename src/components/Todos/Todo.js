@@ -20,7 +20,7 @@ const Todo = ({ todo }) => {
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      console.log(val);
+      // console.log(val);
       setTodos((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, text: val, isEdit: false } : item
@@ -46,6 +46,11 @@ const Todo = ({ todo }) => {
             id={todo.id}
             className={styles.inputForChange}
             value={val}
+            onChange={(e) => {
+              setVal(e.target.value);
+            }}
+            title="Изменил таску:"
+            // onKeyDown={(e) => handleChange(e, todo.id)}
           />
 
           {/* <RiCheckboxMultipleFill onClick={(e) => correctEdit(e, todo.id)} /> */}
