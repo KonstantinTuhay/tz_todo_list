@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./TodoForm.module.css";
 
 const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
@@ -10,6 +10,11 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
       setText("");
     }
   };
+
+  const focusOnAddInput = useRef(null);
+  useEffect(() => {
+    focusOnAddInput.current.focus();
+  }, []);
 
   // const handleClick = (event) => {
   //   setText(event);
@@ -24,6 +29,7 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
         value={text}
         onChange={(event) => setText(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
+        ref={focusOnAddInput}
         // onChange={onChange}
       />
       {/* <button onClick={handleClick}>Add</button> */}

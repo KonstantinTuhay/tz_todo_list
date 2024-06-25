@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TodoForm from "./components/Todos/TodoForm";
 import TodoList from "./components/Todos/TodoList";
 import "./App.css";
 import Info from "./components/Todos/Info";
 import MyContext from "./components/tools/MyContext";
-import { Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import withLogger from "./helpers/withLogger";
+import LoginUsers from "./components/Authorization/LoginUsers";
+import NotFound from "./components/Authorization/NotFound";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -99,8 +101,12 @@ function App() {
       >
         <TodoList todos={todos} deleteTodo={deleteTodo} />
       </MyContext.Provider>
+      <Routes>
+        <Route path="/authorization" element={<LoginUsers />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
 
-      <Link>Log out</Link>
+      <Link to="/authorization">Log out</Link>
     </div>
   );
 }

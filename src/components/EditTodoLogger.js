@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import MyContext from "./tools/MyContext";
 
 const EditTodoLogger = (props) => {
   const [setVal] = useContext(MyContext);
+  const focusOnEditInput = useRef(null);
+  useEffect(() => {
+    focusOnEditInput.current.focus();
+  }, []);
   // console.log(props);
   return (
     <>
       <input
         {...props}
+        ref={focusOnEditInput}
         // onChange={(e) => {
         //   setVal(e.target.value);
         // }}
