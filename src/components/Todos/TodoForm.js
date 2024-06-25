@@ -22,9 +22,9 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
       <input
         placeholder="Enter new todo"
         value={text}
-        // onChange={(event) => setText(event.target.value)}
+        onChange={(event) => setText(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
-        onChange={onChange}
+        // onChange={onChange}
       />
       {/* <button onClick={handleClick}>Add</button> */}
     </div>
