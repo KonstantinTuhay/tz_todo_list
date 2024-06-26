@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Input, Radio, DatePicker, Button, Modal } from "antd";
+import { Link } from "react-router-dom";
+import { Input, Radio, Button, Modal } from "antd";
 
 const LoginUsers = () => {
   const [modal, contextHolder] = Modal.useModal();
@@ -17,61 +18,53 @@ const LoginUsers = () => {
     control,
     formState: { errors, isValid },
     reset,
-    watch,
   } = useForm({ mode: "onBlur" });
 
   const onSubmit = (data) => {
-    // const JSONString = JSON.stringify(data);
-    // (async () => {
-    //   let response = await fetch(
-    //     "https://first-node-js-app-r.herokuapp.com/api/users/register",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(JSONString),
-    //       // body: JSON.stringify(data),
-    //     }
-    //   );
+    const dataUser = data;
+    (async () => {
+      try {
+        let response = await fetch(
+          "https://todo-redev.herokuapp.com/api/users/register",
+          {
+            method: "POST",
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataUser),
+          }
+        );
 
-    //   if (!response.ok) {
-    //     console.error("Запрос не удался");
-    //     return;
-    //   }
+        // if (!response.ok) {
+        //   console.error("Запрос не удался");
+        //   return;
+        // }
 
-    //   let data = await response.json();
-    //   console.log(data);
-    // })();
+        let data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    })();
     console.log(JSON.stringify(data));
     console.log("Успешно зарегистрировано");
     reset();
   };
-
-  const watchPassWord = watch("password");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label>First name:</label>
         <Controller
-          name="firstname"
+          name="username"
           control={control}
           rules={{ required: "Поле обязательно для заполнения" }}
           render={({ field }) => <Input {...field} placeholder="Введите имя" />}
         />
         <p>{errors.text?.message}</p>
       </div>
-      <div>
-        <label>Last name:</label>
-        <Controller
-          name="lastname"
-          control={control}
-          rules={{ required: "Поле обязательно для заполнения" }}
-          render={({ field }) => <Input {...field} placeholder="Введите имя" />}
-        />
-        <p>{errors.text?.message}</p>
-      </div>
+
       <div>
         <label>Email:</label>
         <Controller
@@ -89,36 +82,35 @@ const LoginUsers = () => {
         <p>{errors.email?.message}</p>
       </div>
       <div>
-        <label>Пол:</label>
+        <label>Gender:</label>
         <Controller
           name="gender"
           control={control}
           rules={{ required: "Выберите пол" }}
           render={({ field }) => (
             <Radio.Group {...field}>
-              <Radio value="male">Мужской</Radio>
-              <Radio value="female">Женский</Radio>
+              <Radio value="male">Male</Radio>
+              <Radio value="female">Female</Radio>
             </Radio.Group>
           )}
         />
         <p>{errors.gender?.message}</p>
       </div>
+
       <div>
-        <label>Дата рождения:</label>
+        <label>Age:</label>
         <Controller
-          name="birthday"
+          name="age"
           control={control}
-          rules={{
-            required: "Выберите дату",
-          }}
           render={({ field }) => (
-            <DatePicker {...field} placeholder="Введите дату рождения" />
+            <Input type="number" {...field} placeholder="Число" />
           )}
         />
-        <p>{errors.date?.message}</p>
+        <p>{errors.number?.message}</p>
       </div>
+
       <div>
-        <label>Пароль:</label>
+        <label>Password:</label>
         <Controller
           name="password"
           control={control}
@@ -146,24 +138,7 @@ const LoginUsers = () => {
         />
         <p>{errors.password?.message}</p>
       </div>
-      <div>
-        <label>Подтвердите пароль:</label>
-        <Controller
-          name="confirm-password"
-          control={control}
-          rules={{
-            required: "Поле обязательно для заполнения",
-            validate: (val) => {
-              console.log(watchPassWord === val);
-              return watchPassWord === val || "Пароли не совпадают";
-            },
-          }}
-          render={({ field }) => (
-            <Input {...field} placeholder="Подтвердите пароль" />
-          )}
-        />
-        <p>{errors["confirm-password"]?.message}</p>
-      </div>
+
       {/* <Button type="primary" htmlType="submit" disabled={!isValid}>
         Зарегистрироваться
       </Button> */}
@@ -176,7 +151,9 @@ const LoginUsers = () => {
         Register
       </Button>
       <br />
-      <Button type="primary">Log In</Button>
+      <Link to="/login/authorization">
+        <Button type="primary">Log In</Button>
+      </Link>
       {contextHolder}
     </form>
   );

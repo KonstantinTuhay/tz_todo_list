@@ -3,6 +3,8 @@ import TodoForm from "./components/Todos/TodoForm";
 import TodoList from "./components/Todos/TodoList";
 import Info from "./components/Todos/Info";
 import withLogger from "./helpers/withLogger";
+import { Link } from "react-router-dom";
+import { Button } from "antd";
 import "./App.css";
 
 function AllTodo() {
@@ -44,6 +46,11 @@ function AllTodo() {
     <div className="App">
       <div>
         <h1>Your Todo App</h1>
+
+        <Link to="login">
+          <Button block>Registr</Button>
+        </Link>
+
         <Info />
       </div>
       <AddLogging
