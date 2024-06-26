@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Radio, Button, Modal } from "antd";
+import styles from "./LoginUsers.module.css";
 
 const LoginUsers = () => {
   const [modal, contextHolder] = Modal.useModal();
@@ -36,11 +37,6 @@ const LoginUsers = () => {
           }
         );
 
-        // if (!response.ok) {
-        //   console.error("Запрос не удался");
-        //   return;
-        // }
-
         let data = await response.json();
         console.log(data);
       } catch (error) {
@@ -53,10 +49,12 @@ const LoginUsers = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <h1>Registration</h1>
+      <div className={styles.labels}>
         <label>First name:</label>
         <Controller
+          className={styles.inp}
           name="username"
           control={control}
           rules={{ required: "Поле обязательно для заполнения" }}
@@ -65,9 +63,10 @@ const LoginUsers = () => {
         <p>{errors.text?.message}</p>
       </div>
 
-      <div>
+      <div className={styles.labels}>
         <label>Email:</label>
         <Controller
+          className={styles.inp}
           name="email"
           control={control}
           rules={{
@@ -81,9 +80,10 @@ const LoginUsers = () => {
         />
         <p>{errors.email?.message}</p>
       </div>
-      <div>
+      <div className={styles.labels}>
         <label>Gender:</label>
         <Controller
+          className={styles.inp}
           name="gender"
           control={control}
           rules={{ required: "Выберите пол" }}
@@ -97,9 +97,10 @@ const LoginUsers = () => {
         <p>{errors.gender?.message}</p>
       </div>
 
-      <div>
+      <div className={styles.labels}>
         <label>Age:</label>
         <Controller
+          className={styles.inp}
           name="age"
           control={control}
           render={({ field }) => (
@@ -109,9 +110,10 @@ const LoginUsers = () => {
         <p>{errors.number?.message}</p>
       </div>
 
-      <div>
+      <div className={styles.labels}>
         <label>Password:</label>
         <Controller
+          className={styles.inp}
           name="password"
           control={control}
           rules={{
@@ -139,9 +141,6 @@ const LoginUsers = () => {
         <p>{errors.password?.message}</p>
       </div>
 
-      {/* <Button type="primary" htmlType="submit" disabled={!isValid}>
-        Зарегистрироваться
-      </Button> */}
       <Button
         onClick={countDown}
         type="primary"

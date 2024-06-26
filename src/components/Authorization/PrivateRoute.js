@@ -1,4 +1,4 @@
-import { Route, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ ...props }) => {
   const isAuth = localStorage.getItem("token");

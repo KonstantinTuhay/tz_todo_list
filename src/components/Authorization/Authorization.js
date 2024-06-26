@@ -25,11 +25,6 @@ const Authorization = () => {
         }
       );
 
-      //   if (!response.ok) {
-      //     console.error("Запрос не удался");
-      //     return;
-      //   }
-
       let data = await response.json();
       console.log(data);
       localStorage.setItem("token", data.token);
@@ -90,7 +85,7 @@ const Authorization = () => {
         <p>{errors.password?.message}</p>
       </div>
 
-      {/* <Link to="/"> */}
+      {/* <Link to="/todo"> */}
       <Button type="primary" htmlType="submit">
         Sign In
       </Button>

@@ -1,0 +1,13 @@
+.labels {
+  display: flex;
+  margin: 20px;
+}
+
+.form {
+  display: block;
+  position: relative;
+  top: 50%;
+}
+
+.inp {
+}

@@ -5,7 +5,6 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      // setText(event);
       addTodo(text);
       setText("");
     }

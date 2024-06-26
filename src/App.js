@@ -12,8 +12,6 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginUsers />} />
         <Route path="authorization" element={<Authorization />} />
-        {/* <Route path="*" element={<h1>Not Found</h1>} /> */}
-        {/* <PrivateRoute path="todo" element={<AllTodo />} /> */}
         <Route element={<PrivateRoute />}>
           <Route path="/todo" element={<AllTodo />} />
         </Route>
