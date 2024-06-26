@@ -8,8 +8,6 @@ import MyContext from "../tools/MyContext";
 import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
 
-// import { RiCheckboxMultipleFill } from "react-icons/ri";
-
 const Todo = ({ todo }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
@@ -20,7 +18,6 @@ const Todo = ({ todo }) => {
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      // console.log(val);
       setTodos((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, text: val, isEdit: false } : item
@@ -28,14 +25,6 @@ const Todo = ({ todo }) => {
       );
     }
   };
-  //Будет использоваться, когда понадобиться кнопка (также сверху импорт и снизу дизайнерская кнопка)
-  // const correctEdit = (event, id) => {
-  //   setTodos((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id ? { ...item, text: val, isEdit: false } : item
-  //     )
-  //   );
-  // };
 
   return (
     <>
@@ -50,10 +39,7 @@ const Todo = ({ todo }) => {
               setVal(e.target.value);
             }}
             title="Изменил таску:"
-            // onKeyDown={(e) => handleChange(e, todo.id)}
           />
-
-          {/* <RiCheckboxMultipleFill onClick={(e) => correctEdit(e, todo.id)} /> */}
         </div>
       ) : (
         <div
@@ -64,13 +50,6 @@ const Todo = ({ todo }) => {
           <RiAppleLine className={styles.appleImage} />
           <div className={styles.todoText}>{todo.text}</div>
 
-          {/* <EditLogging
-            className={styles.editImage}
-            // onClick={() => editTodo(todo.id, todo.text)}
-            id={todo.id}
-            text={todo.text}
-            title="Изменил таску:"
-          /> */}
           <CiEdit
             className={styles.editImage}
             onClick={() => editTodo(todo.id, todo.text)}

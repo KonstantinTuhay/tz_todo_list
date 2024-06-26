@@ -5,7 +5,6 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      setText(event);
       addTodo(text);
       setText("");
     }
@@ -16,12 +15,6 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
     focusOnAddInput.current.focus();
   }, []);
 
-  // const handleClick = (event) => {
-  //   setText(event);
-  //   addTodo(text);
-  //   setText("");
-  // };
-
   return (
     <div className={styles.todoForm}>
       <input
@@ -30,9 +23,7 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
         onChange={(event) => setText(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
-        // onChange={onChange}
       />
-      {/* <button onClick={handleClick}>Add</button> */}
     </div>
   );
 };

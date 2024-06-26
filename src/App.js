@@ -1,13 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import TodoForm from "./components/Todos/TodoForm";
 import TodoList from "./components/Todos/TodoList";
-import "./App.css";
 import Info from "./components/Todos/Info";
 import MyContext from "./components/tools/MyContext";
-import { Routes, Route, Link } from "react-router-dom";
 import withLogger from "./helpers/withLogger";
-import LoginUsers from "./components/Authorization/LoginUsers";
-import NotFound from "./components/Authorization/NotFound";
+import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -84,7 +81,6 @@ function App() {
         text={text}
         addTodo={addTodo}
         title="Добавил таску:"
-        // onChange={(event) => setText(event.target.value)}
       />
       <MyContext.Provider
         value={[
@@ -99,11 +95,6 @@ function App() {
       >
         <TodoList todos={todos} deleteTodo={deleteTodo} />
       </MyContext.Provider>
-      {/* <Routes>
-        <Route path="/" element={<LoginUsers />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
-      </Routes> */}
-      {/* <Link to="/authorization">Log out</Link> */}
     </div>
   );
 }
