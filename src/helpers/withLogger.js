@@ -3,8 +3,8 @@ import React from "react";
 const withLogger = (WrappedComponent) => {
   return (props) => {
     const teachMeUseHoc = () => {
-      let date = new Date();
-      let stringDate = `${date.getDate()}.${
+      const date = new Date();
+      const stringDate = `${date.getDate()}.${
         date.getMonth() + 1
       }.${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 

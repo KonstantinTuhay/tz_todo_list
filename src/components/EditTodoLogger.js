@@ -6,13 +6,11 @@ const EditTodoLogger = (props) => {
     focusOnEditInput.current.focus();
   }, []);
   return (
-    <>
-      <input
-        {...props}
-        ref={focusOnEditInput}
-        onKeyDown={(e) => props.handleChange(e, props.id, props.teachMeUseHoc)}
-      />
-    </>
+    <input
+      {...props}
+      ref={focusOnEditInput}
+      onKeyDown={(e) => props.handleChange(e, props.id, props.teachMeUseHoc)}
+    />
   );
 };
 
