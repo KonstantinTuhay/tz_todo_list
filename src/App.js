@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import TodoForm from "./components/Todos/TodoForm";
 import TodoList from "./components/Todos/TodoList";
-import Info from "./components/Todos/Info";
-import MyContext from "./components/tools/MyContext";
-import withLogger from "./helpers/withLogger";
 import "./App.css";
+import Info from "./components/Todos/Info";
+import withLogger from "./helpers/withLogger";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -27,33 +26,6 @@ function App() {
       id: crypto.randomUUID(),
     },
   ]);
-
-  const deleteTodo = (id, teachMeUseHoc) => {
-    teachMeUseHoc();
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo }
-      )
-    );
-  };
-
-  const [val, setVal] = useState("");
-
-  const editTodo = (id, text) => {
-    setVal(text);
-
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
-      )
-    );
-  };
 
   const [text, setText] = useState("");
 
@@ -82,19 +54,8 @@ function App() {
         addTodo={addTodo}
         title="Добавил таску:"
       />
-      <MyContext.Provider
-        value={[
-          deleteTodo,
-          toggleTodo,
-          editTodo,
-          val,
-          setVal,
-          setTodos,
-          editTodo,
-        ]}
-      >
-        <TodoList todos={todos} deleteTodo={deleteTodo} />
-      </MyContext.Provider>
+
+      <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
 }
