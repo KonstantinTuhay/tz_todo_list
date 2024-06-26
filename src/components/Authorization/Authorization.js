@@ -32,6 +32,9 @@ const Authorization = () => {
 
       let data = await response.json();
       console.log(data);
+      localStorage.setItem("token", data.token);
+      const yourToken = localStorage.getItem("token");
+      console.log(yourToken);
     })();
     console.log(JSON.stringify(data));
 
@@ -87,9 +90,13 @@ const Authorization = () => {
         <p>{errors.password?.message}</p>
       </div>
 
+      {/* <Link to="/"> */}
       <Button type="primary" htmlType="submit">
-        <Link to="/">Sign In</Link>
+        Sign In
       </Button>
+      {/* </Link> */}
+
+      <Link to="/todo">TODO</Link>
     </form>
   );
 };

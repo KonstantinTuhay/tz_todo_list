@@ -151,7 +151,7 @@ const LoginUsers = () => {
         Register
       </Button>
       <br />
-      <Link to="/login/authorization">
+      <Link to="authorization">
         <Button type="primary">Log In</Button>
       </Link>
       {contextHolder}
