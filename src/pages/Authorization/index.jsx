@@ -17,7 +17,7 @@ const Registr = () => {
   const onSubmit = (data) => {
     const dataUser = data;
     (async () => {
-      let response = await fetch(
+      const response = await fetch(
         "https://todo-redev.herokuapp.com/api/auth/login",
         {
           method: "POST",
@@ -28,12 +28,10 @@ const Registr = () => {
         }
       );
 
-      let data = await response.json();
+      const data = await response.json();
       console.log(data);
       setToken(data.token);
       console.log(getToken("token"));
-      // localStorage.setItem("token", data.token);
-      // const yourToken = localStorage.getItem("token");
     })();
     console.log(JSON.stringify(data));
 

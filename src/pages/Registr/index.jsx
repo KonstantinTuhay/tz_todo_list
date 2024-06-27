@@ -25,7 +25,7 @@ const LoginUsers = () => {
     const dataUser = data;
     (async () => {
       try {
-        let response = await fetch(
+        const response = await fetch(
           "https://todo-redev.herokuapp.com/api/users/register",
           {
             method: "POST",
@@ -37,7 +37,7 @@ const LoginUsers = () => {
           }
         );
 
-        let data = await response.json();
+        const data = await response.json();
         console.log(data);
       } catch (error) {
         console.log("error: ", error);
