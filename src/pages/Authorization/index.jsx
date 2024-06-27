@@ -2,8 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Button } from "antd";
-import setToken from "../../utils/setToken";
-import getToken from "../../utils/getToken";
+import localStorageHelpers from "../../helpers/localStorageHelpers";
 import styles from "./index.module.css";
 
 const Registr = () => {
@@ -30,8 +29,8 @@ const Registr = () => {
 
       const data = await response.json();
       console.log(data);
-      setToken(data.token);
-      console.log(getToken("token"));
+      localStorageHelpers.setToken(data.token);
+      console.log(localStorageHelpers.getToken("token"));
     })();
     console.log(JSON.stringify(data));
 

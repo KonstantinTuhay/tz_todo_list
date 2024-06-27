@@ -4,8 +4,7 @@ import TodoForm from "../../components/TodoInput";
 import TodoList from "../../components/TodoList";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
-import setToken from "../../utils/setToken";
-import getToken from "../../utils/getToken";
+import localStorageHelpers from "../../helpers/localStorageHelpers";
 import "../../App.css";
 
 function AllTodo() {
@@ -42,8 +41,7 @@ function AllTodo() {
   };
 
   const AddLogging = withLogger(TodoForm);
-  // console.log(localStorage.getItem("token"));
-  console.log(getToken("token"));
+  console.log(localStorageHelpers.getToken("token"));
 
   return (
     <div className="App">
@@ -63,7 +61,7 @@ function AllTodo() {
 
       <TodoList todos={todos} setTodos={setTodos} />
 
-      <Link to="/" onClick={() => setToken("")}>
+      <Link to="/" onClick={() => localStorageHelpers.setToken("")}>
         Log Out
       </Link>
     </div>

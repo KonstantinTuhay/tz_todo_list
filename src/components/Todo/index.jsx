@@ -3,8 +3,8 @@ import { RiAppleLine } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import { MdDoneOutline } from "react-icons/md";
 import withLogger from "../../helpers/withLogger";
-import DeleteTodoLogger from "../Logging/DeleteTodoLogger";
-import EditTodoLogger from "../Logging/EditTodoLogger";
+import DeleteTodoLogger from "../DeleteTodoLogger";
+import EditTodoLogger from "../EditTodoLogger";
 import styles from "./index.module.css";
 
 const Todo = ({ todo, setTodos, todos }) => {
