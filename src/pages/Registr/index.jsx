@@ -26,7 +26,7 @@ const Registr = () => {
     (async () => {
       try {
         const response = await fetch(
-          "https://todo-redev.herokuapp.com/api/users/register",
+          `${process.env.REACT_APP_URL}/users/register`,
           {
             method: "POST",
             headers: {

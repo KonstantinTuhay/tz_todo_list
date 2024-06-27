@@ -18,16 +18,13 @@ const Authorization = () => {
   const onSubmit = (data) => {
     const dataUser = data;
     (async () => {
-      const response = await fetch(
-        "https://todo-redev.herokuapp.com/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataUser),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataUser),
+      });
 
       const data = await response.json();
       console.log(data);
