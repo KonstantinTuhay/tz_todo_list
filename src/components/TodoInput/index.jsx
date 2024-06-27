@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import styles from "./TodoForm.module.css";
+import styles from "./index.module.css";
 
 const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
   const handleChange = (event) => {

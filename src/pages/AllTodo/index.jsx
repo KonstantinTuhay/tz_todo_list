@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TodoForm from "../../components/TodoInput/TodoForm";
-import TodoList from "../../components/TodoList/TodoList";
+import TodoForm from "../../components/TodoInput";
+import TodoList from "../../components/TodoList";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 import setToken from "../../utils/setToken";
