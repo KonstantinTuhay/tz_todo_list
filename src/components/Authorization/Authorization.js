@@ -8,7 +8,7 @@ const Authorization = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm({ mode: "onBlur" });
 
