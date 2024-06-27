@@ -4,7 +4,6 @@ import TodoForm from "./components/Todos/TodoForm";
 import TodoList from "./components/Todos/TodoList";
 import Info from "./components/Todos/Info";
 import withLogger from "./helpers/withLogger";
-import { Button } from "antd";
 import "./App.css";
 
 function AllTodo() {
@@ -48,12 +47,8 @@ function AllTodo() {
   };
   return (
     <div className="App">
-      <div>
+      <div className="small_header">
         <h1>Your Todo App</h1>
-
-        <Link to="/">
-          <Button block>Registr</Button>
-        </Link>
 
         <Info />
       </div>

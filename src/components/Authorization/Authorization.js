@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Button } from "antd";
+import styles from "./Authorization.module.css";
 
 const Authorization = () => {
   const {
@@ -37,8 +38,12 @@ const Authorization = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.registration_form}
+    >
       <div>
+        <h1>Authorization</h1>
         <label>Email:</label>
         <Controller
           name="email"

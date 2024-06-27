@@ -3,7 +3,7 @@
   margin: 20px;
 }
 
-.registration_form {
+h1 {
   margin-top: 70px;
 }
 
@@ -21,4 +21,8 @@
 .btnslocated {
   display: flex;
   justify-content: center;
+}
+
+.registration_form {
+  margin-top: 70px;
 }

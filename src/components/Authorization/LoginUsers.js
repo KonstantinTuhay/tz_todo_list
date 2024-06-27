@@ -49,8 +49,11 @@ const LoginUsers = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h1>Registration</h1>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.registration_form}
+    >
+      <h1 className={styles.header}>Registration</h1>
       <div className={styles.labels}>
         <label>First name:</label>
         <Controller
@@ -141,19 +144,25 @@ const LoginUsers = () => {
         <p>{errors.password?.message}</p>
       </div>
 
-      <Button
-        onClick={countDown}
-        type="primary"
-        htmlType="submit"
-        disabled={!isValid}
-      >
-        Register
-      </Button>
-      <br />
-      <Link to="authorization">
-        <Button type="primary">Log In</Button>
-      </Link>
-      {contextHolder}
+      <div className={styles.btnslocated}>
+        <div className={styles.btns}>
+          <Button
+            className={styles.btn}
+            onClick={countDown}
+            type="primary"
+            htmlType="submit"
+            disabled={!isValid}
+          >
+            Register
+          </Button>
+          <Link to="authorization">
+            <Button className={styles.btn} type="primary">
+              Log In
+            </Button>
+          </Link>
+          {contextHolder}
+        </div>
+      </div>
     </form>
   );
 };
