@@ -1,11 +1,13 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Input, Button } from "antd";
 import localStorageHelpers from "../../helpers/localStorageHelpers";
 import styles from "./index.module.css";
 
 const Authorization = () => {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     control,
@@ -30,10 +32,9 @@ const Authorization = () => {
       const data = await response.json();
       console.log(data);
       localStorageHelpers.setToken(data.token);
-      // console.log(localStorageHelpers.getToken("token"));
+      navigate("/todo");
     })();
     console.log(JSON.stringify(data));
-
     reset();
   };
 
@@ -90,13 +91,9 @@ const Authorization = () => {
         <p>{errors.password?.message}</p>
       </div>
 
-      {/* <Link to="/todo"> */}
       <Button type="primary" htmlType="submit">
         Sign In
       </Button>
-      {/* </Link> */}
-
-      <Link to="/todo">TODO</Link>
     </form>
   );
 };
