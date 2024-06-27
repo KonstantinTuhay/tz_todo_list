@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginUsers from "./components/Authorization/LoginUsers";
-import Authorization from "./components/Authorization/Authorization";
-import PrivateRoute from "./components/Authorization/PrivateRoute";
-import AllTodo from "./AllTodo";
+import LoginUsers from "./pages/Registr";
+import Authorization from "./pages/Authorization";
+import PrivateRoute from "./components/PrivateRoutes";
+import AllTodo from "./pages/AllTodo";
 import "./App.css";
 
 function App() {

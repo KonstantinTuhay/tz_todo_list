@@ -2,7 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Radio, Button, Modal } from "antd";
-import styles from "./LoginUsers.module.css";
+import styles from "./index.module.css";
 
 const LoginUsers = () => {
   const [modal, contextHolder] = Modal.useModal();

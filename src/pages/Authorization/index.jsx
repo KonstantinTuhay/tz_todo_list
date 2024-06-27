@@ -2,9 +2,11 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Button } from "antd";
-import styles from "./Authorization.module.css";
+import setToken from "../../utils/setToken";
+import getToken from "../../utils/getToken";
+import styles from "./index.module.css";
 
-const Authorization = () => {
+const Registr = () => {
   const {
     handleSubmit,
     control,
@@ -28,9 +30,10 @@ const Authorization = () => {
 
       let data = await response.json();
       console.log(data);
-      localStorage.setItem("token", data.token);
-      const yourToken = localStorage.getItem("token");
-      console.log(yourToken);
+      setToken(data.token);
+      console.log(getToken("token"));
+      // localStorage.setItem("token", data.token);
+      // const yourToken = localStorage.getItem("token");
     })();
     console.log(JSON.stringify(data));
 
@@ -101,4 +104,4 @@ const Authorization = () => {
   );
 };
 
-export default Authorization;
+export default Registr;

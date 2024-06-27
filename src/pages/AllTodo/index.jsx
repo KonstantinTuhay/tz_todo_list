@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TodoForm from "./components/Todos/TodoForm";
-import TodoList from "./components/Todos/TodoList";
-import Info from "./components/Todos/Info";
-import withLogger from "./helpers/withLogger";
-import "./App.css";
+import TodoForm from "../../components/TodoInput/TodoForm";
+import TodoList from "../../components/TodoList/TodoList";
+import Info from "../../components/InfoCircle";
+import withLogger from "../../helpers/withLogger";
+import setToken from "../../utils/setToken";
+import getToken from "../../utils/getToken";
+import "../../App.css";
 
 function AllTodo() {
   const [todos, setTodos] = useState([
@@ -40,11 +42,9 @@ function AllTodo() {
   };
 
   const AddLogging = withLogger(TodoForm);
-  console.log(localStorage.getItem("token"));
+  // console.log(localStorage.getItem("token"));
+  console.log(getToken("token"));
 
-  const clearLocalStorage = () => {
-    localStorage.setItem("token", "");
-  };
   return (
     <div className="App">
       <div className="small_header">
@@ -63,7 +63,7 @@ function AllTodo() {
 
       <TodoList todos={todos} setTodos={setTodos} />
 
-      <Link to="/" onClick={clearLocalStorage}>
+      <Link to="/" onClick={() => setToken("")}>
         Log Out
       </Link>
     </div>
