@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Input, Radio, Button, Modal } from "antd";
 import styles from "./index.module.css";
 
-const LoginUsers = () => {
+const Registr = () => {
   const [modal, contextHolder] = Modal.useModal();
 
   const countDown = () => {
@@ -167,4 +167,4 @@ const LoginUsers = () => {
   );
 };
 
-export default LoginUsers;
+export default Registr;

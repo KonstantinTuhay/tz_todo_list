@@ -41,7 +41,7 @@ function AllTodo() {
   };
 
   const AddLogging = withLogger(TodoForm);
-  console.log(localStorageHelpers.getToken("token"));
+  // console.log(localStorageHelpers.getToken("token"));
 
   return (
     <div className="App">

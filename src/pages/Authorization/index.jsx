@@ -5,7 +5,7 @@ import { Input, Button } from "antd";
 import localStorageHelpers from "../../helpers/localStorageHelpers";
 import styles from "./index.module.css";
 
-const Registr = () => {
+const Authorization = () => {
   const {
     handleSubmit,
     control,
@@ -30,7 +30,7 @@ const Registr = () => {
       const data = await response.json();
       console.log(data);
       localStorageHelpers.setToken(data.token);
-      console.log(localStorageHelpers.getToken("token"));
+      // console.log(localStorageHelpers.getToken("token"));
     })();
     console.log(JSON.stringify(data));
 
@@ -101,4 +101,4 @@ const Registr = () => {
   );
 };
 
-export default Registr;
+export default Authorization;
