@@ -15,7 +15,6 @@ const Todo = ({ todo, setTodos, todos }) => {
 
   const deleteTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
-    setTodos(todos.filter((todo) => todo.id !== id));
 
     (async () => {
       let token = localStorage.getItem("token");
@@ -34,23 +33,46 @@ const Todo = ({ todo, setTodos, todos }) => {
       //   return;
       // }
 
+      setTodos(todos.filter((todo) => todo.id !== id));
+
       let data = await response.json();
       console.log(data);
     })();
   };
 
   const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo }
-      )
-    );
+    (async () => {
+      let token = localStorage.getItem("token");
+
+      let response = await fetch(
+        `${process.env.REACT_APP_URL}/todos/${id}/isCompleted`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          // body: JSON.stringify({
+          //   title: "Learn JS",
+          // }),
+        }
+      );
+
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id
+            ? { ...todo, isCompleted: !todo.isCompleted }
+            : { ...todo }
+        )
+      );
+
+      let data = await response.json();
+      console.log(data);
+    })();
   };
 
-  const editTodo = (id, text) => {
-    setVal(text);
+  const editTodo = (id, title) => {
+    setVal(title);
 
     setTodos((prev) =>
       prev.map((todo) =>
@@ -68,7 +90,7 @@ const Todo = ({ todo, setTodos, todos }) => {
       (async () => {
         let token = localStorage.getItem("token");
 
-        let response = await fetch(`${process.env.REACT_APP_URL}/todos/1`, {
+        let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -123,7 +145,7 @@ const Todo = ({ todo, setTodos, todos }) => {
 
           <CiEdit
             className={styles.editImage}
-            onClick={() => editTodo(todo.id, todo.text)}
+            onClick={() => editTodo(todo.id, todo.title)}
           />
           <DeleteLogging
             className={styles.deleteImage}
