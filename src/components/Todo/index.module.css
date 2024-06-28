@@ -8,6 +8,7 @@
   border: 2px solid #555;
   color: black;
   background-color: #fff;
+  transition: 1s;
 }
 
 .todoText {
@@ -16,9 +17,9 @@
 }
 
 .completedTodo {
-  color: black;
   background-color: #58b478;
   text-decoration: line-through;
+  transition: 1s;
 }
 
 .inputForChange {

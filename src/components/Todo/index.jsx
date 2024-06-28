@@ -7,11 +7,9 @@ import DeleteTodoLogger from "../DeleteTodoLogger";
 import EditTodoLogger from "../EditTodoLogger";
 import styles from "./index.module.css";
 
-const Todo = ({ todo, setTodos, todos }) => {
+const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
-
-  const [val, setVal] = useState("");
 
   const deleteTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
@@ -69,49 +67,51 @@ const Todo = ({ todo, setTodos, todos }) => {
   const editTodo = (id, title) => {
     setVal(title);
 
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo }
-      )
-    );
+    // setTodos((prev) =>
+    //   prev.map((todo) =>
+    //     todo.id === id ? (
+    //       <input
+    //       // value={title}
+    //       // onChange={(e) => {
+    //       //   setVal(e.target.value);
+    //       // }}
+    //       />
+    //     ) : (
+    //       { ...todo }
+    //     )
+    //   )
+    // );
   };
 
-  const handleChange = (event, id, teachMeUseHoc) => {
-    if (event.key === "Enter") {
-      teachMeUseHoc();
-
-      (async () => {
-        let token = localStorage.getItem("token");
-
-        let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: val,
-          }),
-        });
-
-        console.log(response);
-        setTodos((prev) =>
-          prev.map((item) =>
-            item.id === id ? { ...item, title: val, isCompleted: false } : item
-          )
-        );
-
-        let data = await response.json();
-        console.log(data);
-      })();
-    }
-  };
+  // const handleChange = (event, id) => {
+  //   if (event.key === "Enter") {
+  //     // teachMeUseHoc();
+  //     (async () => {
+  //       let token = localStorage.getItem("token");
+  //       let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
+  //         method: "PATCH",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({
+  //           title: val,
+  //         }),
+  //       });
+  //       console.log(response);
+  //       setTodos((prev) =>
+  //         prev.map((item) => (item.id === id ? { ...item, title: val } : item))
+  //       );
+  //       setPath(null);
+  //       let data = await response.json();
+  //       console.log(data);
+  //     })();
+  //   }
+  // };
 
   return (
     <>
-      {todo.isCompleted ? (
+      {/* {false ? (
         <div>
           <EditLogging
             handleChange={handleChange}
@@ -123,34 +123,39 @@ const Todo = ({ todo, setTodos, todos }) => {
             }}
             title="Изменил таску:"
           />
-        </div>
-      ) : (
-        <div
-          className={`${styles.todo} ${
-            todo.isCompleted ? styles.completedTodo : ""
-          }`}
-        >
-          <RiAppleLine className={styles.appleImage} />
-          <div className={styles.todoText}>{todo.title}</div>
+        </div> */}
+      {/* // ) : ( */}
+      <div
+        className={`${styles.todo} ${
+          todo.isCompleted ? styles.completedTodo : ""
+        }`}
+      >
+        <RiAppleLine className={styles.appleImage} />
+        <div className={styles.todoText}>{todo.title}</div>
 
-          <CiEdit
-            className={styles.editImage}
-            onClick={() => editTodo(todo.id, todo.title)}
-          />
-          <DeleteLogging
-            className={styles.deleteImage}
-            id={todo.id}
-            text={todo.title}
-            title="Удалил таску:"
-            deleteTodo={deleteTodo}
-          />
+        <CiEdit
+          className={styles.editImage}
+          // onClick={() => editTodo(todo.id, todo.title)}
+          onClick={() => {
+            setPath(todo.id);
+            editTodo(todo.id, todo.title);
+          }}
+          // onKeyDown={(e) => handleChange(e, todo.id)}
+        />
+        <DeleteLogging
+          className={styles.deleteImage}
+          id={todo.id}
+          text={todo.title}
+          title="Удалил таску:"
+          deleteTodo={deleteTodo}
+        />
 
-          <MdDoneOutline
-            className={styles.doneImage}
-            onClick={() => toggleTodo(todo.id)}
-          />
-        </div>
-      )}
+        <MdDoneOutline
+          className={styles.doneImage}
+          onClick={() => toggleTodo(todo.id)}
+        />
+      </div>
+      {/* // )} */}
     </>
   );
 };
