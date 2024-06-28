@@ -20,7 +20,7 @@ const Todo = ({ todo, setTodos, todos }) => {
     (async () => {
       let token = localStorage.getItem("token");
       console.log(token);
-      let response = await fetch(`${process.env.REACT_APP_URL}/todos/1`, {
+      let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -64,11 +64,6 @@ const Todo = ({ todo, setTodos, todos }) => {
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      // setTodos((prev) =>
-      //   prev.map((item) =>
-      //     item.id === id ? { ...item, text: val, isCompleted: false } : item
-      //   )
-      // );
 
       (async () => {
         let token = localStorage.getItem("token");
@@ -133,7 +128,7 @@ const Todo = ({ todo, setTodos, todos }) => {
           <DeleteLogging
             className={styles.deleteImage}
             id={todo.id}
-            text={todo.text}
+            text={todo.title}
             title="Удалил таску:"
             deleteTodo={deleteTodo}
           />
