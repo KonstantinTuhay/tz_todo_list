@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Modal, FloatButton } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { Switch } from "antd";
 
 const Info = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

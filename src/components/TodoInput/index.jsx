@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styles from "./index.module.css";
 
-const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
+const TodoForm = ({ setText, text, addTodo, teachMeUseHoc }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();

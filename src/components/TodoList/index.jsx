@@ -7,7 +7,6 @@ const TodoList = ({ todos, setTodos }) => {
   const [val, setVal] = useState("");
   const handleChange = (event, id) => {
     if (event.key === "Enter") {
-      // teachMeUseHoc();
       (async () => {
         let token = localStorage.getItem("token");
         let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {

@@ -66,65 +66,10 @@ const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
 
   const editTodo = (id, title) => {
     setVal(title);
-
-    // setTodos((prev) =>
-    //   prev.map((todo) =>
-    //     todo.id === id ? (
-    //       <input
-    //       // value={title}
-    //       // onChange={(e) => {
-    //       //   setVal(e.target.value);
-    //       // }}
-    //       />
-    //     ) : (
-    //       { ...todo }
-    //     )
-    //   )
-    // );
   };
-
-  // const handleChange = (event, id) => {
-  //   if (event.key === "Enter") {
-  //     // teachMeUseHoc();
-  //     (async () => {
-  //       let token = localStorage.getItem("token");
-  //       let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
-  //         method: "PATCH",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           title: val,
-  //         }),
-  //       });
-  //       console.log(response);
-  //       setTodos((prev) =>
-  //         prev.map((item) => (item.id === id ? { ...item, title: val } : item))
-  //       );
-  //       setPath(null);
-  //       let data = await response.json();
-  //       console.log(data);
-  //     })();
-  //   }
-  // };
 
   return (
     <>
-      {/* {false ? (
-        <div>
-          <EditLogging
-            handleChange={handleChange}
-            id={todo.id}
-            className={styles.inputForChange}
-            value={val}
-            onChange={(e) => {
-              setVal(e.target.value);
-            }}
-            title="Изменил таску:"
-          />
-        </div> */}
-      {/* // ) : ( */}
       <div
         className={`${styles.todo} ${
           todo.isCompleted ? styles.completedTodo : ""
@@ -135,12 +80,10 @@ const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
 
         <CiEdit
           className={styles.editImage}
-          // onClick={() => editTodo(todo.id, todo.title)}
           onClick={() => {
             setPath(todo.id);
             editTodo(todo.id, todo.title);
           }}
-          // onKeyDown={(e) => handleChange(e, todo.id)}
         />
         <DeleteLogging
           className={styles.deleteImage}
@@ -155,7 +98,6 @@ const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
           onClick={() => toggleTodo(todo.id)}
         />
       </div>
-      {/* // )} */}
     </>
   );
 };

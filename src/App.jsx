@@ -15,7 +15,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/todo" element={<AllTodo />} />
         </Route>
-        <Route path="/" element={<Registr />} />
+        <Route path="*" element={<Registr />} />
       </Routes>
     </div>
   );
