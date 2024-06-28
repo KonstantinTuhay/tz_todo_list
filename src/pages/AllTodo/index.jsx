@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TodoForm from "../../components/TodoInput";
 import TodoList from "../../components/TodoList";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 import localStorageHelpers from "../../helpers/localStorageHelpers";
+// import getToken from "../../helpers/getToken";
+// import setToken from "../../helpers/setToken";
 import "../../App.css";
 
 function AllTodo() {
@@ -29,19 +31,68 @@ function AllTodo() {
     // },
   ]);
 
+  useEffect(() => {
+    // console.log(localStorage.getItem("token"));
+    // console.log(getToken("token"));
+
+    const token = localStorage.getItem("token");
+    // const token = localStorageHelpers.getToken("token");
+    (async () => {
+      let response = await fetch(
+        `${process.env.REACT_APP_URL}/todos?isCompleted=true`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      let data = await response.json();
+      setTodos(data);
+      console.log(data);
+    })();
+  }, []);
+
   const [text, setText] = useState("");
 
   const addTodo = (text) => {
-    const newTodo = {
-      ...todos,
-      text,
-      id: crypto.randomUUID(),
-    };
-    setTodos([...todos, newTodo]);
+    // const newTodo = {
+    //   ...todos,
+    //   text,
+    //   id: crypto.randomUUID(),
+    // };
+    // setTodos([...todos, newTodo]);
+
+    (async () => {
+      let token = localStorage.getItem("token");
+      let response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: text,
+        }),
+      });
+      // if (!response.ok) {
+      //   console.error("Запрос не удался");
+      //   return;
+      // }
+
+      // console.log(response.json());
+
+      let data = await response.json();
+      setTodos([...todos, data]);
+      // console.log(todos);
+      console.log(data);
+    })();
   };
+  console.log(todos);
 
   const AddLogging = withLogger(TodoForm);
-  // console.log(localStorageHelpers.getToken("token"));
 
   return (
     <div className="App">

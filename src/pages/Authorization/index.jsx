@@ -3,9 +3,14 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "antd";
 import localStorageHelpers from "../../helpers/localStorageHelpers";
+// import getToken from "../../helpers/getToken";
+// import setToken from "../../helpers/setToken";
 import styles from "./index.module.css";
 
 const Authorization = () => {
+  // console.log(localStorage.getItem("token"));
+  // console.log(localStorageHelpers.getToken("token"));
+
   const navigate = useNavigate();
 
   const {
@@ -28,10 +33,13 @@ const Authorization = () => {
 
       const data = await response.json();
       console.log(data);
-      localStorageHelpers.setToken(data.token);
+      localStorage.setItem("token", data.token);
+      console.log(localStorage.getItem("token"));
+      // console.log(`-----`);
+      // localStorageHelpers.setToken(data.token);
+      // console.log(localStorageHelpers.getToken("token"));
       navigate("/todo");
     })();
-    console.log(JSON.stringify(data));
     reset();
   };
 

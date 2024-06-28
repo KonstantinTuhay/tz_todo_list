@@ -16,6 +16,27 @@ const Todo = ({ todo, setTodos, todos }) => {
   const deleteTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
     setTodos(todos.filter((todo) => todo.id !== id));
+
+    (async () => {
+      let token = localStorage.getItem("token");
+      console.log(token);
+      let response = await fetch(`${process.env.REACT_APP_URL}/todos/1`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({}),
+      });
+
+      // if (!response.ok) {
+      //   console.error("Запрос не удался");
+      //   return;
+      // }
+
+      let data = await response.json();
+      console.log(data);
+    })();
   };
 
   const toggleTodo = (id) => {
@@ -33,7 +54,9 @@ const Todo = ({ todo, setTodos, todos }) => {
 
     setTodos((prev) =>
       prev.map((todo) =>
-        todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
+        todo.id === id
+          ? { ...todo, isCompleted: !todo.isCompleted }
+          : { ...todo }
       )
     );
   };
@@ -41,17 +64,47 @@ const Todo = ({ todo, setTodos, todos }) => {
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      setTodos((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, text: val, isEdit: false } : item
-        )
-      );
+      // setTodos((prev) =>
+      //   prev.map((item) =>
+      //     item.id === id ? { ...item, text: val, isCompleted: false } : item
+      //   )
+      // );
+
+      (async () => {
+        let token = localStorage.getItem("token");
+
+        let response = await fetch(`${process.env.REACT_APP_URL}/todos/1`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: val,
+          }),
+        });
+
+        console.log(response);
+        setTodos((prev) =>
+          prev.map((item) =>
+            item.id === id ? { ...item, title: val, isCompleted: false } : item
+          )
+        );
+
+        // if (!response.ok) {
+        //   console.error("Запрос не удался");
+        //   return;
+        // }
+
+        let data = await response.json();
+        console.log(data);
+      })();
     }
   };
 
   return (
     <>
-      {todo.isEdit ? (
+      {todo.isCompleted ? (
         <div>
           <EditLogging
             handleChange={handleChange}
@@ -71,7 +124,7 @@ const Todo = ({ todo, setTodos, todos }) => {
           }`}
         >
           <RiAppleLine className={styles.appleImage} />
-          <div className={styles.todoText}>{todo.text}</div>
+          <div className={styles.todoText}>{todo.title}</div>
 
           <CiEdit
             className={styles.editImage}
