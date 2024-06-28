@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { RiAppleLine } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import { MdDoneOutline } from "react-icons/md";
 import withLogger from "../../helpers/withLogger";
 import DeleteTodoLogger from "../DeleteTodoLogger";
-import EditTodoLogger from "../EditTodoLogger";
+// import EditTodoLogger from "../EditTodoLogger";
 import styles from "./index.module.css";
 
 const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
-  const EditLogging = withLogger(EditTodoLogger);
+  // const EditLogging = withLogger(EditTodoLogger);
 
   const deleteTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
