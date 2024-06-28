@@ -28,11 +28,6 @@ const Todo = ({ todo, setTodos, todos }) => {
         body: JSON.stringify({}),
       });
 
-      // if (!response.ok) {
-      //   console.error("Запрос не удался");
-      //   return;
-      // }
-
       setTodos(todos.filter((todo) => todo.id !== id));
 
       let data = await response.json();
@@ -52,9 +47,9 @@ const Todo = ({ todo, setTodos, todos }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          // body: JSON.stringify({
-          //   title: "Learn JS",
-          // }),
+          body: JSON.stringify({
+            title: val,
+          }),
         }
       );
 
@@ -107,11 +102,6 @@ const Todo = ({ todo, setTodos, todos }) => {
             item.id === id ? { ...item, title: val, isCompleted: false } : item
           )
         );
-
-        // if (!response.ok) {
-        //   console.error("Запрос не удался");
-        //   return;
-        // }
 
         let data = await response.json();
         console.log(data);

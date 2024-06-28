@@ -48,20 +48,12 @@ function AllTodo() {
 
       let data = await response.json();
       setTodos(data);
-      console.log(data);
     })();
   }, []);
 
   const [text, setText] = useState("");
 
   const addTodo = (text) => {
-    // const newTodo = {
-    //   ...todos,
-    //   text,
-    //   id: crypto.randomUUID(),
-    // };
-    // setTodos([...todos, newTodo]);
-
     (async () => {
       let token = localStorage.getItem("token");
       let response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
@@ -74,20 +66,11 @@ function AllTodo() {
           title: text,
         }),
       });
-      // if (!response.ok) {
-      //   console.error("Запрос не удался");
-      //   return;
-      // }
-
-      // console.log(response.json());
 
       let data = await response.json();
       setTodos([...todos, data]);
-      // console.log(todos);
-      console.log(data);
     })();
   };
-  console.log(todos);
 
   const AddLogging = withLogger(TodoForm);
 

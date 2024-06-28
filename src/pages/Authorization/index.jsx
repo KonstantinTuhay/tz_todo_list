@@ -8,9 +8,6 @@ import localStorageHelpers from "../../helpers/localStorageHelpers";
 import styles from "./index.module.css";
 
 const Authorization = () => {
-  // console.log(localStorage.getItem("token"));
-  // console.log(localStorageHelpers.getToken("token"));
-
   const navigate = useNavigate();
 
   const {
@@ -35,7 +32,6 @@ const Authorization = () => {
       console.log(data);
       localStorage.setItem("token", data.token);
       console.log(localStorage.getItem("token"));
-      // console.log(`-----`);
       // localStorageHelpers.setToken(data.token);
       // console.log(localStorageHelpers.getToken("token"));
       navigate("/todo");
