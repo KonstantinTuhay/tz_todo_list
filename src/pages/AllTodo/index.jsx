@@ -10,26 +10,7 @@ import localStorageHelpers from "../../helpers/localStorageHelpers";
 import "../../App.css";
 
 function AllTodo() {
-  const [todos, setTodos] = useState([
-    // {
-    //   text: "first todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
-    // {
-    //   text: "second todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
-    // {
-    //   text: "third todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     // console.log(localStorage.getItem("token"));
