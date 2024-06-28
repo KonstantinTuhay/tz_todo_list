@@ -7,7 +7,7 @@ const TodoList = ({ todos, setTodos }) => {
   const [val, setVal] = useState("");
   const handleChange = (event, id) => {
     if (event.key === "Enter") {
-      (async () => {
+      const change = async () => {
         let token = localStorage.getItem("token");
         let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
           method: "PATCH",
@@ -26,7 +26,8 @@ const TodoList = ({ todos, setTodos }) => {
         setPath(null);
         let data = await response.json();
         console.log(data);
-      })();
+      };
+      change();
     }
   };
   return (

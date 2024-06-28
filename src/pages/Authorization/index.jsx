@@ -17,25 +17,23 @@ const Authorization = () => {
     reset,
   } = useForm({ mode: "onBlur" });
 
-  const onSubmit = (data) => {
-    const dataUser = data;
-    (async () => {
-      const response = await fetch(`${process.env.REACT_APP_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataUser),
-      });
+  const onSubmit = async (dataUser) => {
+    // const dataUser = data;
+    const response = await fetch(`${process.env.REACT_APP_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataUser),
+    });
 
-      const data = await response.json();
-      console.log(data);
-      localStorage.setItem("token", data.token);
-      console.log(localStorage.getItem("token"));
-      // localStorageHelpers.setToken(data.token);
-      // console.log(localStorageHelpers.getToken("token"));
-      navigate("/todo");
-    })();
+    const data = await response.json();
+    console.log(data);
+    localStorage.setItem("token", data.token);
+    console.log(localStorage.getItem("token"));
+    // localStorageHelpers.setToken(data.token);
+    // console.log(localStorageHelpers.getToken("token"));
+    navigate("/todo");
     reset();
   };
 

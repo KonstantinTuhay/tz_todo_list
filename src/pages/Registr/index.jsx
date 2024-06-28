@@ -21,29 +21,25 @@ const Registr = () => {
     reset,
   } = useForm({ mode: "onBlur" });
 
-  const onSubmit = (data) => {
-    const dataUser = data;
-    (async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}/users/register`,
-          {
-            method: "POST",
-            headers: {
-              accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataUser),
-          }
-        );
+  const onSubmit = async (dataUser) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/users/register`,
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataUser),
+        }
+      );
 
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.log("error: ", error);
-      }
-    })();
-    console.log(JSON.stringify(data));
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
     console.log("Успешно зарегистрировано");
     reset();
   };

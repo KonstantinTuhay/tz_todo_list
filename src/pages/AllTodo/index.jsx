@@ -17,9 +17,8 @@ function AllTodo() {
     // console.log(getToken("token"));
 
     const token = localStorage.getItem("token");
-    // const token = localStorageHelpers.getToken("token");
     (async () => {
-      let response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
+      const response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -34,23 +33,21 @@ function AllTodo() {
 
   const [text, setText] = useState("");
 
-  const addTodo = (text) => {
-    (async () => {
-      let token = localStorage.getItem("token");
-      let response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: text,
-        }),
-      });
+  const addTodo = async (text) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: text,
+      }),
+    });
 
-      let data = await response.json();
-      setTodos([...todos, data]);
-    })();
+    let data = await response.json();
+    setTodos([...todos, data]);
   };
 
   const AddLogging = withLogger(TodoForm);

@@ -11,57 +11,52 @@ const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   // const EditLogging = withLogger(EditTodoLogger);
 
-  const deleteTodo = (id, teachMeUseHoc) => {
+  const deleteTodo = async (id, teachMeUseHoc) => {
     teachMeUseHoc();
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({}),
+    });
 
-    (async () => {
-      let token = localStorage.getItem("token");
-      console.log(token);
-      let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
-        method: "DELETE",
+    setTodos(todos.filter((todo) => todo.id !== id));
+
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const toggleTodo = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/todos/${id}/isCompleted`,
+      {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({}),
-      });
+        body: JSON.stringify({
+          title: val,
+        }),
+      }
+    );
 
-      setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id
+          ? { ...todo, isCompleted: !todo.isCompleted }
+          : { ...todo }
+      )
+    );
 
-      let data = await response.json();
-      console.log(data);
-    })();
-  };
-
-  const toggleTodo = (id) => {
-    (async () => {
-      let token = localStorage.getItem("token");
-
-      let response = await fetch(
-        `${process.env.REACT_APP_URL}/todos/${id}/isCompleted`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: val,
-          }),
-        }
-      );
-
-      setTodos(
-        todos.map((todo) =>
-          todo.id === id
-            ? { ...todo, isCompleted: !todo.isCompleted }
-            : { ...todo }
-        )
-      );
-
-      let data = await response.json();
-      console.log(data);
-    })();
+    const data = await response.json();
+    console.log(data);
   };
 
   const editTodo = (id, title) => {
