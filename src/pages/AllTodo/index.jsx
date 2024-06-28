@@ -38,16 +38,13 @@ function AllTodo() {
     const token = localStorage.getItem("token");
     // const token = localStorageHelpers.getToken("token");
     (async () => {
-      let response = await fetch(
-        `${process.env.REACT_APP_URL}/todos?isCompleted=true`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      let response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       let data = await response.json();
       setTodos(data);
