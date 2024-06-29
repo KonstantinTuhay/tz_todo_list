@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Input, Radio, Button, Modal } from "antd";
+import api from "../../helpers/api";
 import styles from "./index.module.css";
 
 const Registr = () => {
@@ -23,25 +24,13 @@ const Registr = () => {
 
   const onSubmit = async (dataUser) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/users/register`,
-        {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataUser),
-        }
-      );
-
-      const data = await response.json();
-      console.log(data);
+      const response = await api.post("/users/register", dataUser);
+      console.log(response);
+      console.log("Успешно зарегистрировано");
+      reset();
     } catch (error) {
-      console.log("error: ", error);
+      console.error("Ошибка при получении данных:", error);
     }
-    console.log("Успешно зарегистрировано");
-    reset();
   };
 
   return (

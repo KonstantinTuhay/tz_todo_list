@@ -2,9 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "antd";
-// import localStorageHelpers from "../../helpers/localStorageHelpers";
-// import getToken from "../../helpers/getToken";
-// import setToken from "../../helpers/setToken";
+import api from "../../helpers/api";
 import styles from "./index.module.css";
 
 const Authorization = () => {
@@ -18,23 +16,16 @@ const Authorization = () => {
   } = useForm({ mode: "onBlur" });
 
   const onSubmit = async (dataUser) => {
-    // const dataUser = data;
-    const response = await fetch(`${process.env.REACT_APP_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataUser),
-    });
+    try {
+      const response = await api.post("/auth/login", dataUser);
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
+      navigate("/todo");
 
-    const data = await response.json();
-    console.log(data);
-    localStorage.setItem("token", data.token);
-    console.log(localStorage.getItem("token"));
-    // localStorageHelpers.setToken(data.token);
-    // console.log(localStorageHelpers.getToken("token"));
-    navigate("/todo");
-    reset();
+      reset();
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   };
 
   return (

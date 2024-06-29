@@ -5,49 +5,35 @@ import TodoList from "../../components/TodoList";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 import localStorageHelpers from "../../helpers/localStorageHelpers";
-// import getToken from "../../helpers/getToken";
-// import setToken from "../../helpers/setToken";
+import api from "../../helpers/api";
 import "../../App.css";
 
 function AllTodo() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    // console.log(localStorage.getItem("token"));
-    // console.log(getToken("token"));
+    async function fetchData() {
+      try {
+        const response = await api.get("/todos");
+        setTodos(response.data);
+      } catch (error) {
+        console.error("Ошибка при получении данных:", error);
+      }
+    }
 
-    const token = localStorage.getItem("token");
-    (async () => {
-      const response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      let data = await response.json();
-      setTodos(data);
-    })();
+    fetchData();
   }, []);
 
   const [text, setText] = useState("");
 
   const addTodo = async (text) => {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_URL}/todos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title: text,
-      }),
-    });
-
-    let data = await response.json();
-    setTodos([...todos, data]);
+    try {
+      const response = await api.post("/todos", { title: text });
+      console.log(response);
+      setTodos([...todos, response.data]);
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   };
 
   const AddLogging = withLogger(TodoForm);

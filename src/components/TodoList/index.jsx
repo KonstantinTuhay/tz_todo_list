@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Todo from "../Todo";
 import styles from "./index.module.css";
+import api from "../../helpers/api";
 
 const TodoList = ({ todos, setTodos }) => {
   const [path, setPath] = useState(null);
@@ -8,24 +9,18 @@ const TodoList = ({ todos, setTodos }) => {
   const handleChange = (event, id) => {
     if (event.key === "Enter") {
       const change = async () => {
-        let token = localStorage.getItem("token");
-        let response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: val,
-          }),
-        });
-        console.log(response);
-        setTodos((prev) =>
-          prev.map((item) => (item.id === id ? { ...item, title: val } : item))
-        );
-        setPath(null);
-        let data = await response.json();
-        console.log(data);
+        try {
+          const response = await api.patch(`/todos/${id}`, { title: val });
+          console.log(response);
+          setTodos((prev) =>
+            prev.map((item) =>
+              item.id === id ? { ...item, title: val } : item
+            )
+          );
+          setPath(null);
+        } catch (error) {
+          console.error("Ошибка при получении данных:", error);
+        }
       };
       change();
     }

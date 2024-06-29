@@ -4,59 +4,39 @@ import { CiEdit } from "react-icons/ci";
 import { MdDoneOutline } from "react-icons/md";
 import withLogger from "../../helpers/withLogger";
 import DeleteTodoLogger from "../DeleteTodoLogger";
-// import EditTodoLogger from "../EditTodoLogger";
+import api from "../../helpers/api";
 import styles from "./index.module.css";
 
 const Todo = ({ todo, setTodos, todos, setPath, setVal, val }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
-  // const EditLogging = withLogger(EditTodoLogger);
 
   const deleteTodo = async (id, teachMeUseHoc) => {
-    teachMeUseHoc();
-    const token = localStorage.getItem("token");
-    console.log(token);
-    const response = await fetch(`${process.env.REACT_APP_URL}/todos/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({}),
-    });
-
-    setTodos(todos.filter((todo) => todo.id !== id));
-
-    const data = await response.json();
-    console.log(data);
+    try {
+      const response = await api.delete(`/todos/${id}`);
+      console.log(response);
+      setTodos(todos.filter((todo) => todo.id !== id));
+      teachMeUseHoc();
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   };
 
   const toggleTodo = async (id) => {
-    const token = localStorage.getItem("token");
-
-    const response = await fetch(
-      `${process.env.REACT_APP_URL}/todos/${id}/isCompleted`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: val,
-        }),
-      }
-    );
-
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo }
-      )
-    );
-
-    const data = await response.json();
-    console.log(data);
+    try {
+      const response = await api.patch(`/todos/${id}/isCompleted`, {
+        title: val,
+      });
+      console.log(response);
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id
+            ? { ...todo, isCompleted: !todo.isCompleted }
+            : { ...todo }
+        )
+      );
+    } catch (error) {
+      console.error("Ошибка при получении данных:", error);
+    }
   };
 
   const editTodo = (id, title) => {
