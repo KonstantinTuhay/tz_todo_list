@@ -7,24 +7,24 @@ import withLogger from "./helpers/withLogger";
 
 function App() {
   const [todos, setTodos] = useState([
-    // {
-    //   text: "first todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
-    // {
-    //   text: "second todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
-    // {
-    //   text: "third todo",
-    //   isCompleted: false,
-    //   isEdit: false,
-    //   id: crypto.randomUUID(),
-    // },
+    {
+      text: "first todo",
+      isCompleted: false,
+      isEdit: false,
+      id: crypto.randomUUID(),
+    },
+    {
+      text: "second todo",
+      isCompleted: false,
+      isEdit: false,
+      id: crypto.randomUUID(),
+    },
+    {
+      text: "third todo",
+      isCompleted: false,
+      isEdit: false,
+      id: crypto.randomUUID(),
+    },
   ]);
 
   const [text, setText] = useState("");
