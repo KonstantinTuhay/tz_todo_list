@@ -71,7 +71,7 @@ const Todo = ({ todo, setTodos, todos }) => {
           }`}
         >
           <RiAppleLine className={styles.appleImage} />
-          <div className={styles.todoText}>{todo.text}</div>
+          <div className={styles.todoText}>{todo.todo}</div>
 
           <CiEdit
             className={styles.editImage}
