@@ -5,7 +5,7 @@ import { addNewTodo } from "../../redux/actions/listActions";
 import { addTodo } from "../../redux/actions/formActions";
 
 const TodoForm = ({ todos, setTodos, teachMeUseHoc, onChange }) => {
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
 
   const dispatch = useDispatch();
   const { todo } = useSelector((state) => state.form);
@@ -21,7 +21,8 @@ const TodoForm = ({ todos, setTodos, teachMeUseHoc, onChange }) => {
 
   const handleChange = (event) => {
     if (event.key === "Enter") {
-      dispatch(addNewTodo({ id: crypto.randomUUID(), todo }));
+      event.preventDefault();
+      dispatch(addNewTodo({ id: crypto.randomUUID(), todo: todo }));
       dispatch(addTodo(""));
       teachMeUseHoc();
       // setText(event);
@@ -39,7 +40,7 @@ const TodoForm = ({ todos, setTodos, teachMeUseHoc, onChange }) => {
     <div className={styles.todoForm}>
       <input
         placeholder="Enter new todo"
-        value={text}
+        value={todo}
         // onChange={(event) => setText(event.target.value)}
         onChange={(event) => dispatch(addTodo(event.target.value))}
         onKeyDown={(e) => handleChange(e)}
