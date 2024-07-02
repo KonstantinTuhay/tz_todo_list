@@ -27,17 +27,6 @@ function App() {
     },
   ]);
 
-  const [text, setText] = useState("");
-
-  const addTodo = (text) => {
-    const newTodo = {
-      ...todos,
-      text,
-      id: crypto.randomUUID(),
-    };
-    setTodos([...todos, newTodo]);
-  };
-
   const AddLogging = withLogger(TodoForm);
 
   return (
@@ -49,9 +38,9 @@ function App() {
       <AddLogging
         todos={todos}
         setTodos={setTodos}
-        setText={setText}
-        text={text}
-        addTodo={addTodo}
+        // setText={setText}
+        // text={text}
+        // addTodo={addTodo}
         title="Добавил таску:"
       />
 

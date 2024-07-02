@@ -1,13 +1,32 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./TodoForm.module.css";
+import { addNewTodo } from "../../redux/actions/listActions";
+import { addTodo } from "../../redux/actions/formActions";
 
-const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
+const TodoForm = ({ todos, setTodos, teachMeUseHoc, onChange }) => {
+  const [text, setText] = useState("");
+
+  const dispatch = useDispatch();
+  const { todo } = useSelector((state) => state.form);
+
+  // const addTodo = (text) => {
+  //   const newTodo = {
+  //     ...todos,
+  //     text,
+  //     id: crypto.randomUUID(),
+  //   };
+  //   setTodos([...todos, newTodo]);
+  // };
+
   const handleChange = (event) => {
     if (event.key === "Enter") {
+      dispatch(addNewTodo({ id: crypto.randomUUID(), todo }));
+      dispatch(addTodo(""));
       teachMeUseHoc();
-      setText(event);
-      addTodo(text);
-      setText("");
+      // setText(event);
+      // addTodo(text);
+      // setText("");
     }
   };
 
@@ -21,7 +40,8 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
       <input
         placeholder="Enter new todo"
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        // onChange={(event) => setText(event.target.value)}
+        onChange={(event) => dispatch(addTodo(event.target.value))}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
       />
