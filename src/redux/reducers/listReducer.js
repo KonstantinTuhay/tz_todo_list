@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const listReducer = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case ADD_NEW_TODO:
       return {
