@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const editReducer = (state = initialState, action) => {
-  //   console.log(state);
   switch (action.type) {
     case EDIT_TODO:
       return { id: { [action.payload]: true } };
