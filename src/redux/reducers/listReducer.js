@@ -1,5 +1,6 @@
 import { ADD_NEW_TODO } from "../actions/listActions";
 import { DELETE_TODO } from "../actions/deleteActions";
+import { TOGGLE_TODO } from "../actions/toggleActions";
 
 const initialState = {
   todos: [],
@@ -15,6 +16,14 @@ const listReducer = (state = initialState, action) => {
     case DELETE_TODO:
       return {
         todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
+    case TOGGLE_TODO:
+      return {
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload
+            ? { ...todo, isCompleted: !todo.isCompleted }
+            : { ...todo }
+        ),
       };
     default:
       return state;

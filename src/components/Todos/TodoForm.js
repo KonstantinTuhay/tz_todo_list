@@ -22,7 +22,9 @@ const TodoForm = ({ todos, setTodos, teachMeUseHoc, onChange }) => {
   const handleChange = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      dispatch(addNewTodo({ id: crypto.randomUUID(), todo: todo }));
+      dispatch(
+        addNewTodo({ id: crypto.randomUUID(), todo: todo, isCompleted: false })
+      );
       dispatch(addTodo(""));
       teachMeUseHoc();
       // setText(event);

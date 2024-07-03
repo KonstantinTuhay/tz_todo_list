@@ -8,6 +8,7 @@ import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTodo } from "../../redux/actions/deleteActions";
+import { toggleTodo } from "../../redux/actions/toggleActions";
 
 const Todo = ({ todo, setTodos }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
@@ -19,19 +20,20 @@ const Todo = ({ todo, setTodos }) => {
   const [val, setVal] = useState("");
 
   const deleteOneTodo = (id, teachMeUseHoc) => {
-    // teachMeUseHoc();
+    teachMeUseHoc();
     dispatch(deleteTodo(id));
     // setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
-          : { ...todo }
-      )
-    );
+  const toggleOneTodo = (id) => {
+    dispatch(toggleTodo(id));
+    // setTodos(
+    //   todos.map((todo) =>
+    //     todo.id === id
+    //       ? { ...todo, isCompleted: !todo.isCompleted }
+    //       : { ...todo }
+    //   )
+    // );
   };
 
   const editTodo = (id, text) => {
@@ -93,7 +95,7 @@ const Todo = ({ todo, setTodos }) => {
 
           <MdDoneOutline
             className={styles.doneImage}
-            onClick={() => toggleTodo(todo.id)}
+            onClick={() => toggleOneTodo(todo.id)}
           />
         </div>
       )}
