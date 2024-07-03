@@ -6,16 +6,22 @@ import { RiAppleLine } from "react-icons/ri";
 import { MdDoneOutline } from "react-icons/md";
 import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTodo } from "../../redux/actions/deleteActions";
 
-const Todo = ({ todo, setTodos, todos }) => {
+const Todo = ({ todo, setTodos }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
 
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.list);
+
   const [val, setVal] = useState("");
 
-  const deleteTodo = (id, teachMeUseHoc) => {
-    teachMeUseHoc();
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const deleteOneTodo = (id, teachMeUseHoc) => {
+    // teachMeUseHoc();
+    dispatch(deleteTodo(id));
+    // setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const toggleTodo = (id) => {
@@ -82,7 +88,7 @@ const Todo = ({ todo, setTodos, todos }) => {
             id={todo.id}
             text={todo.text}
             title="Удалил таску:"
-            deleteTodo={deleteTodo}
+            deleteOneTodo={deleteOneTodo}
           />
 
           <MdDoneOutline
