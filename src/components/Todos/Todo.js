@@ -9,15 +9,20 @@ import { CiEdit } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTodo } from "../../redux/actions/deleteActions";
 import { toggleTodo } from "../../redux/actions/toggleActions";
+import { editTodo } from "../../redux/actions/editActions";
+import { addChangeText } from "../../redux/actions/addChangeActions";
+import { changeList } from "../../redux/actions/changeListAction";
 
-const Todo = ({ todo, setTodos }) => {
+const Todo = ({ todo }) => {
+  console.log(todo);
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
 
   const dispatch = useDispatch();
-  const { todos } = useSelector((state) => state.list);
-
-  const [val, setVal] = useState("");
+  const { text } = useSelector((state) => state.change);
+  const { id } = useSelector((state) => state.edit);
+  const idTask = Object.keys(id);
+  console.log(idTask);
 
   const deleteOneTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
@@ -36,39 +41,50 @@ const Todo = ({ todo, setTodos }) => {
     // );
   };
 
-  const editTodo = (id, text) => {
-    setVal(text);
+  const editOneTodo = (id) => {
+    dispatch(editTodo(id));
+    // setVal(text);
 
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
-      )
-    );
+    // setTodos((prev) =>
+    //   prev.map((todo) =>
+    //     todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
+    //   )
+    // );
   };
 
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      setTodos((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, text: val, isEdit: false } : item
-        )
+      dispatch(
+        changeList({
+          id: crypto.randomUUID(),
+          text: text,
+          isCompleted: false,
+        })
       );
+      dispatch(editTodo(null));
+      // setTodos((prev) =>
+      //   prev.map((item) =>
+      //     item.id === id ? { ...item, text: val, isEdit: false } : item
+      //   )
+      // );
     }
   };
 
   return (
     <>
-      {todo.isEdit ? (
+      {todo.id === idTask[0] ? (
         <div>
           <EditLogging
             handleChange={handleChange}
             id={todo.id}
             className={styles.inputForChange}
-            value={val}
-            onChange={(e) => {
-              setVal(e.target.value);
-            }}
+            value={todo.text}
+            //куда-то надо новое имя записывать
+            onChange={(event) => dispatch(addChangeText(event.target.value))}
+            // onChange={(e) => {
+            //   setVal(e.target.value);
+            // }}
             title="Изменил таску:"
           />
         </div>
@@ -79,16 +95,16 @@ const Todo = ({ todo, setTodos }) => {
           }`}
         >
           <RiAppleLine className={styles.appleImage} />
-          <div className={styles.todoText}>{todo.todo}</div>
+          <div className={styles.todoText}>{todo.text}</div>
 
           <CiEdit
             className={styles.editImage}
-            onClick={() => editTodo(todo.id, todo.text)}
+            onClick={() => editOneTodo(todo.id, todo.text)}
           />
           <DeleteLogging
             className={styles.deleteImage}
             id={todo.id}
-            text={todo.text}
+            // text={todo.text}
             title="Удалил таску:"
             deleteOneTodo={deleteOneTodo}
           />
@@ -98,7 +114,7 @@ const Todo = ({ todo, setTodos }) => {
             onClick={() => toggleOneTodo(todo.id)}
           />
         </div>
-      )}
+      )}{" "}
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 const EditTodoLogger = (props) => {
   const focusOnEditInput = useRef(null);
+  const { handleChange, id, teachMeUseHoc } = props;
   useEffect(() => {
     focusOnEditInput.current.focus();
   }, []);
@@ -10,7 +11,7 @@ const EditTodoLogger = (props) => {
       <input
         {...props}
         ref={focusOnEditInput}
-        onKeyDown={(e) => props.handleChange(e, props.id, props.teachMeUseHoc)}
+        onKeyDown={(e) => handleChange(e, id, teachMeUseHoc)}
       />
     </>
   );

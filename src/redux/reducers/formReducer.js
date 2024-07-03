@@ -1,6 +1,6 @@
 import { ADD_TODO } from "../actions/formActions";
 const initialState = {
-  todo: "",
+  text: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
     case ADD_TODO:
       return {
         ...state,
-        todo: action.payload,
+        text: action.payload,
       };
     default:
       return state;
