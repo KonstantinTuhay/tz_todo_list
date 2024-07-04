@@ -22,7 +22,7 @@ const Todo = ({ todo }) => {
   const { text } = useSelector((state) => state.change);
   const { id } = useSelector((state) => state.edit);
   const idTask = Object.keys(id);
-  console.log(idTask);
+  console.log(typeof text);
 
   const deleteOneTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
@@ -33,9 +33,10 @@ const Todo = ({ todo }) => {
     dispatch(toggleTodo(id));
   };
 
-  const editOneTodo = (id) => {
+  const editOneTodo = (id, text) => {
     console.log("Edit--------------------------------------");
     dispatch(editTodo(id));
+    dispatch(addChangeText(text));
   };
 
   const handleChange = (event, id, teachMeUseHoc) => {
@@ -61,11 +62,9 @@ const Todo = ({ todo }) => {
             handleChange={handleChange}
             id={todo.id}
             className={styles.inputForChange}
-            // value={todo.text}
+            value={text}
             onChange={(event) => dispatch(addChangeText(event.target.value))}
             title="Изменил таску:"
-            dispatch={dispatch}
-            addChangeText={addChangeText}
           />
         </div>
       ) : (
