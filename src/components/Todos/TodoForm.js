@@ -10,16 +10,18 @@ const TodoForm = ({ teachMeUseHoc }) => {
 
   const handleChange = (event) => {
     if (event.key === "Enter") {
-      event.preventDefault();
-      dispatch(
-        addNewTodo({
-          id: crypto.randomUUID(),
-          text: text,
-          isCompleted: false,
-        })
-      );
-      dispatch(addTodo(""));
-      teachMeUseHoc();
+      if (text.length > 0) {
+        event.preventDefault();
+        dispatch(
+          addNewTodo({
+            id: crypto.randomUUID(),
+            text: text,
+            isCompleted: false,
+          })
+        );
+        dispatch(addTodo(""));
+        teachMeUseHoc();
+      }
     }
   };
 

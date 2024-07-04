@@ -61,9 +61,11 @@ const Todo = ({ todo }) => {
             handleChange={handleChange}
             id={todo.id}
             className={styles.inputForChange}
-            value={todo.text}
+            // value={todo.text}
             onChange={(event) => dispatch(addChangeText(event.target.value))}
             title="Изменил таску:"
+            dispatch={dispatch}
+            addChangeText={addChangeText}
           />
         </div>
       ) : (
