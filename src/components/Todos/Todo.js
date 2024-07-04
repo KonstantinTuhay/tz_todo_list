@@ -14,7 +14,6 @@ import { CiEdit } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
 
 const Todo = ({ todo }) => {
-  console.log(todo);
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
 
@@ -22,7 +21,6 @@ const Todo = ({ todo }) => {
   const { text } = useSelector((state) => state.change);
   const { id } = useSelector((state) => state.edit);
   const idTask = Object.keys(id);
-  console.log(typeof text);
 
   const deleteOneTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
@@ -34,14 +32,11 @@ const Todo = ({ todo }) => {
   };
 
   const editOneTodo = (id, text) => {
-    console.log("Edit--------------------------------------");
     dispatch(editTodo(id));
     dispatch(addChangeText(text));
   };
 
   const handleChange = (event, id, teachMeUseHoc) => {
-    console.log("Edit--------------------------------------");
-
     if (event.key === "Enter") {
       teachMeUseHoc();
       dispatch(
