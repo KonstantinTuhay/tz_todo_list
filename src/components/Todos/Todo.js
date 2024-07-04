@@ -20,7 +20,7 @@ const Todo = ({ todo }) => {
   const dispatch = useDispatch();
   const { text } = useSelector((state) => state.change);
   const { id } = useSelector((state) => state.edit);
-  const idTask = Object.keys(id);
+  console.log(id);
 
   const deleteOneTodo = (id, teachMeUseHoc) => {
     teachMeUseHoc();
@@ -51,7 +51,7 @@ const Todo = ({ todo }) => {
 
   return (
     <>
-      {todo.id === idTask[0] ? (
+      {todo.id === id ? (
         <div>
           <EditLogging
             handleChange={handleChange}
