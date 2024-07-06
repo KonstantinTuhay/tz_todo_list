@@ -1,13 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import styles from "./TodoForm.module.css";
+import { addTask } from "../redux/slices/taskSlice.js";
+import { useDispatch } from "react-redux";
 
 const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
       setText(event);
       addTodo(text);
       setText("");
+      dispatch(addTask(text));
     }
   };
 

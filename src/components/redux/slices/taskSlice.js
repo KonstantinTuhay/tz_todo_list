@@ -5,6 +5,7 @@ const taskSlice = createSlice({
   initialState: [],
   reducer: {
     addTask: (state, action) => {
+      console.log(action);
       state.push({
         id: crypto.randomUUID(),
         text: action.payload,
@@ -14,5 +15,5 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask } = taskSlice.action;
+export const { addTask } = taskSlice.actions;
 export default taskSlice.reducer;

@@ -1,12 +1,16 @@
 import React from "react";
 import Todo from "./Todo";
 import styles from "./TodoList.module.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const TodoList = ({ todos, setTodos }) => {
+  const tasks = useSelector((state) => state.tasksSlice);
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.TodoList}>
-      {todos.length === 0 && <h2>Todo list is empty</h2>}
-      {todos.map((todo) => (
+      {tasks.length === 0 && <h2>Todo list is empty</h2>}
+      {tasks.map((todo) => (
         <Todo key={todo.id} todo={todo} setTodos={setTodos} todos={todos} />
       ))}
     </div>
