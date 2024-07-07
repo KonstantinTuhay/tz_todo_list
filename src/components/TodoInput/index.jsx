@@ -4,7 +4,7 @@ import { addTask } from "../redux/slices/taskSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { addTaskInput } from "../redux/slices/addSlice";
 
-const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
+const TodoForm = ({ teachMeUseHoc }) => {
   const dispatch = useDispatch();
   const add = useSelector((state) => state.addSlice);
 

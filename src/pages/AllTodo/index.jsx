@@ -1,43 +1,11 @@
 import React from "react";
 import TodoForm from "../../components/TodoInput";
 import TodoList from "../../components/TodoList";
-import "../../App.css";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
+import "../../App.css";
 
 function AllTodo() {
-  // const [todos, setTodos] = useState([
-  // {
-  //   text: "first todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // {
-  //   text: "second todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // {
-  //   text: "third todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // ]);
-
-  // const [text, setText] = useState("");
-
-  // const addTodo = (text) => {
-  //   const newTodo = {
-  //     ...todos,
-  //     text,
-  //     id: crypto.randomUUID(),
-  //   };
-  //   setTodos([...todos, newTodo]);
-  // };
-
   const AddLogging = withLogger(TodoForm);
 
   return (
@@ -46,19 +14,9 @@ function AllTodo() {
         <h1>Your Todo App</h1>
         <Info />
       </div>
-      <AddLogging
-        // todos={todos}
-        // setTodos={setTodos}
-        // setText={setText}
-        // text={text}
-        // addTodo={addTodo}
-        title="Добавил таску:"
-      />
+      <AddLogging title="Добавил таску:" />
 
-      <TodoList
-      // todos={todos}
-      // setTodos={setTodos}
-      />
+      <TodoList />
     </div>
   );
 }
