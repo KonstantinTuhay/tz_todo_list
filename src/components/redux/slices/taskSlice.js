@@ -25,14 +25,6 @@ const taskSlice = createSlice({
       if (task) {
         task.text = action.payload.previousEdit;
       }
-      // return state.map((task) =>
-      //   task.id === action.payload.id
-      //     ? {
-      //         ...task,
-      //         text: action.payload.previousEdit,
-      //       }
-      //     : { ...task }
-      // );
     },
   },
 });

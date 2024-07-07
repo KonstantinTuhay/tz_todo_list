@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Todo.module.css";
 import withLogger from "../../helpers/withLogger";
 import DeleteTodoLogger from "../DeleteTodoLogger";
@@ -11,15 +11,13 @@ import { editTask } from "../redux/slices/editSlices";
 import { previousEditTask } from "../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const Todo = ({ todo, setTodos, todos }) => {
+const Todo = ({ todo }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
 
   const edit = useSelector((state) => state.editWithSlice);
   const previousEdit = useSelector((state) => state.previousEditSlice);
   const dispatch = useDispatch();
-
-  const [val, setVal] = useState("");
 
   const deleteTodo = (id, teachMeUseHoc) => {
     console.log(todo);
@@ -34,14 +32,6 @@ const Todo = ({ todo, setTodos, todos }) => {
   const editTodo = (id, text) => {
     dispatch(editTask(id));
     dispatch(previousEditTask(text));
-
-    // setVal(text);
-
-    // setTodos((prev) =>
-    //   prev.map((todo) =>
-    //     todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
-    //   )
-    // );
   };
 
   const handleChange = (event, id, teachMeUseHoc) => {
@@ -50,12 +40,6 @@ const Todo = ({ todo, setTodos, todos }) => {
       teachMeUseHoc();
       dispatch(editChange({ id, previousEdit }));
       dispatch(editTask(null));
-
-      // setTodos((prev) =>
-      //   prev.map((item) =>
-      //     item.id === id ? { ...item, text: val, isEdit: false } : item
-      //   )
-      // );
     }
   };
 
@@ -70,7 +54,6 @@ const Todo = ({ todo, setTodos, todos }) => {
             value={previousEdit}
             onChange={(e) => {
               dispatch(previousEditTask(e.target.value));
-              // setVal(e.target.value);
             }}
             title="Изменил таску:"
           />

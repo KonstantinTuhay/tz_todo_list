@@ -32,14 +32,6 @@ const taskReducer = createReducer(initialState, (builder) => {
       if (task) {
         task.text = action.payload.previousEdit;
       }
-      // return state.map((task) =>
-      //   task.id === action.payload
-      //     ? {
-      //         ...task,
-      //         text: action.payload.previousEdit,
-      //       }
-      //     : { ...task }
-      // );
     });
 });
 
