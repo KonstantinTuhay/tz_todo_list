@@ -20,8 +20,23 @@ const taskSlice = createSlice({
     removeTask: (state, action) => {
       return state.filter((task) => task.id !== action.payload);
     },
+    editChange: (state, action) => {
+      const task = state.find((task) => task.id === action.payload.id);
+      if (task) {
+        task.text = action.payload.previousEdit;
+      }
+      // return state.map((task) =>
+      //   task.id === action.payload.id
+      //     ? {
+      //         ...task,
+      //         text: action.payload.previousEdit,
+      //       }
+      //     : { ...task }
+      // );
+    },
   },
 });
 
-export const { addTask, toggleTask, removeTask } = taskSlice.actions;
+export const { addTask, toggleTask, editChange, removeTask } =
+  taskSlice.actions;
 export default taskSlice.reducer;

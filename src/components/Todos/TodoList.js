@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 const TodoList = ({ todos, setTodos }) => {
   const tasks = useSelector((state) => state.tasksSlice);
   const dispatch = useDispatch();
-  console.log(tasks);
   return (
     <div className={styles.TodoList}>
       {tasks.length === 0 && <h2>Todo list is empty</h2>}

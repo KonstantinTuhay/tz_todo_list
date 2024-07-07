@@ -6,14 +6,17 @@ import { RiAppleLine } from "react-icons/ri";
 import { MdDoneOutline } from "react-icons/md";
 import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
-import { removeTask, toggleTask } from "../redux/slices/taskSlice";
+import { removeTask, toggleTask, editChange } from "../redux/slices/taskSlice";
+import { editTask } from "../redux/slices/editSlices";
+import { previousEditTask } from "../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Todo = ({ todo, setTodos, todos }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
 
-  // const tasks = useSelector((state) => state.tasksSlice);
+  const edit = useSelector((state) => state.editWithSlice);
+  const previousEdit = useSelector((state) => state.previousEditSlice);
   const dispatch = useDispatch();
 
   const [val, setVal] = useState("");
@@ -29,37 +32,45 @@ const Todo = ({ todo, setTodos, todos }) => {
   };
 
   const editTodo = (id, text) => {
-    setVal(text);
+    dispatch(editTask(id));
+    dispatch(previousEditTask(text));
 
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
-      )
-    );
+    // setVal(text);
+
+    // setTodos((prev) =>
+    //   prev.map((todo) =>
+    //     todo.id === id ? { ...todo, isEdit: !todo.isEdit } : { ...todo }
+    //   )
+    // );
   };
 
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
+      console.log(event);
       teachMeUseHoc();
-      setTodos((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, text: val, isEdit: false } : item
-        )
-      );
+      dispatch(editChange({ id, previousEdit }));
+      dispatch(editTask(null));
+
+      // setTodos((prev) =>
+      //   prev.map((item) =>
+      //     item.id === id ? { ...item, text: val, isEdit: false } : item
+      //   )
+      // );
     }
   };
 
   return (
     <>
-      {todo.isEdit ? (
+      {edit === todo.id ? (
         <div>
           <EditLogging
             handleChange={handleChange}
             id={todo.id}
             className={styles.inputForChange}
-            value={val}
+            value={previousEdit}
             onChange={(e) => {
-              setVal(e.target.value);
+              dispatch(previousEditTask(e.target.value));
+              // setVal(e.target.value);
             }}
             title="Изменил таску:"
           />
