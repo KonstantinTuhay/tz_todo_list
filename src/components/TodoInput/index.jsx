@@ -1,18 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import styles from "./index.module.css";
 import { addTask } from "../redux/slices/taskSlice.js";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addTaskInput } from "../redux/slices/addSlice";
 
 const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
   const dispatch = useDispatch();
+  const add = useSelector((state) => state.addSlice);
 
   const handleChange = (event) => {
     if (event.key === "Enter") {
       teachMeUseHoc();
-      setText(event);
-      addTodo(text);
-      setText("");
-      dispatch(addTask(text));
+      dispatch(addTask(add));
+      dispatch(addTaskInput(""));
     }
   };
 
@@ -25,9 +25,8 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
     <div className={styles.todoForm}>
       <input
         placeholder="Enter new todo"
-        value={text}
-        // onChange={(event) => setText(event.target.value)}
-        onChange={(event) => event.target.value}
+        value={add}
+        onChange={(event) => dispatch(addTaskInput(event.target.value))}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
       />
