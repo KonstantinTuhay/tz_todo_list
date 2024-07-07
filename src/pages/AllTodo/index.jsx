@@ -1,8 +1,8 @@
 import React from "react";
-import TodoForm from "../../components/Todos/TodoForm";
-import TodoList from "../../components/Todos/TodoList";
+import TodoForm from "../../components/TodoInput";
+import TodoList from "../../components/TodoList";
 import "../../App.css";
-import Info from "../../components/Todos/Info";
+import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 
 function AllTodo() {
