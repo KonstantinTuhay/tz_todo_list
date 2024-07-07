@@ -1,64 +1,22 @@
-import React, { useState } from "react";
-import TodoForm from "./components/Todos/TodoForm";
-import TodoList from "./components/Todos/TodoList";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Registr from "./pages/Registration";
+import Authorization from "./pages/Authorization";
+import PrivateRoute from "./components/PrivateRoute";
+import AllTodo from "./pages/AllTodo";
 import "./App.css";
-import Info from "./components/Todos/Info";
-import withLogger from "./helpers/withLogger";
 
 function App() {
-  // const [todos, setTodos] = useState([
-  // {
-  //   text: "first todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // {
-  //   text: "second todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // {
-  //   text: "third todo",
-  //   isCompleted: false,
-  //   isEdit: false,
-  //   id: crypto.randomUUID(),
-  // },
-  // ]);
-
-  // const [text, setText] = useState("");
-
-  // const addTodo = (text) => {
-  //   const newTodo = {
-  //     ...todos,
-  //     text,
-  //     id: crypto.randomUUID(),
-  //   };
-  //   setTodos([...todos, newTodo]);
-  // };
-
-  const AddLogging = withLogger(TodoForm);
-
   return (
     <div className="App">
-      <div>
-        <h1>Your Todo App</h1>
-        <Info />
-      </div>
-      <AddLogging
-        // todos={todos}
-        // setTodos={setTodos}
-        // setText={setText}
-        // text={text}
-        // addTodo={addTodo}
-        title="Добавил таску:"
-      />
-
-      <TodoList
-      // todos={todos}
-      // setTodos={setTodos}
-      />
+      <Routes>
+        <Route path="/registr" element={<Registr />} />
+        <Route path="/authorization" element={<Authorization />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/todo" element={<AllTodo />} />
+        </Route>
+        <Route path="*" element={<Registr />} />
+      </Routes>
     </div>
   );
 }
