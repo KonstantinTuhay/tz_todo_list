@@ -26,7 +26,8 @@ const TodoForm = ({ setText, text, addTodo, teachMeUseHoc, onChange }) => {
       <input
         placeholder="Enter new todo"
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        // onChange={(event) => setText(event.target.value)}
+        onChange={(event) => event.target.value}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
       />

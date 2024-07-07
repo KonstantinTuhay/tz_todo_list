@@ -5,9 +5,13 @@ import editSlices from "./slices/editSlices";
 import editReducer from "./reducers/editReducer";
 import previousEditReducer from "./reducers/previousEditReducer";
 import previousEditSlice from "./slices/previousEditSlice";
+import addSlice from "./slices/addSlice";
+import addReducer from "./reducers/addReducer";
 
 export const store = configureStore({
   reducer: {
+    addReducer: addReducer,
+    addSlice: addSlice,
     previousEditSlice: previousEditSlice,
     previousEditReducer: previousEditReducer,
     editWithSlice: editSlices,
