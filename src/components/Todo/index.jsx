@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Todo.module.css";
+import styles from "./index.module.css";
 import withLogger from "../../helpers/withLogger";
 import DeleteTodoLogger from "../DeleteTodoLogger";
 import { RiAppleLine } from "react-icons/ri";

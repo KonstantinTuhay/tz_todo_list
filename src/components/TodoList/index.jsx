@@ -1,6 +1,6 @@
 import React from "react";
-import Todo from "./Todo";
-import styles from "./TodoList.module.css";
+import Todo from "../Todo";
+import styles from "./index.module.css";
 import { useSelector } from "react-redux";
 import { useGetTasksQuery } from "../../api";
 
