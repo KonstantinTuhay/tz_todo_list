@@ -5,16 +5,16 @@ import { useSelector } from "react-redux";
 import { useGetTasksQuery } from "../../api";
 
 const TodoList = ({ todos, setTodos }) => {
-  const { data: tasks, error, isLoading } = useGetTasksQuery();
+  // const { data: tasks, error, isLoading } = useGetTasksQuery();
   const tasks = useSelector((state) => state.tasksSlice);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
+  // if (error) {
+  //   return <p>Error: {error.message}</p>;
+  // }
 
   return (
     <div className={styles.TodoList}>

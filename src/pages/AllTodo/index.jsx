@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import TodoForm from "./components/Todos/TodoForm";
-import TodoList from "./components/Todos/TodoList";
-import "./App.css";
-import Info from "./components/Todos/Info";
-import withLogger from "./helpers/withLogger";
+import React from "react";
+import TodoForm from "../../components/Todos/TodoForm";
+import TodoList from "../../components/Todos/TodoList";
+import "../../App.css";
+import Info from "../../components/Todos/Info";
+import withLogger from "../../helpers/withLogger";
 
 function AllTodo() {
   // const [todos, setTodos] = useState([
