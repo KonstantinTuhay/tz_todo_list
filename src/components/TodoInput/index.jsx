@@ -3,16 +3,25 @@ import styles from "./index.module.css";
 import { addTask } from "../redux/slices/taskSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { addTaskInput } from "../redux/slices/addSlice";
+import { useCreateToDoMutation } from "../../apiRQuery.js";
 
 const TodoForm = ({ teachMeUseHoc }) => {
+  // const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [createTask] = useCreateToDoMutation();
+
   const dispatch = useDispatch();
   const add = useSelector((state) => state.addSlice);
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     if (event.key === "Enter") {
+      // console.log(add);
+      // const newTask = add;
       teachMeUseHoc();
+      // setNewTaskTitle("");
       dispatch(addTask(add));
       dispatch(addTaskInput(""));
+      await createTask(add);
+      console.log(localStorage.getItem("token"));
     }
   };
 
@@ -24,9 +33,12 @@ const TodoForm = ({ teachMeUseHoc }) => {
   return (
     <div className={styles.todoForm}>
       <input
+        type="text"
         placeholder="Enter new todo"
+        // value={add}
         value={add}
         onChange={(event) => dispatch(addTaskInput(event.target.value))}
+        // onChange={(event) => setNewTaskTitle(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
       />

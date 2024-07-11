@@ -16,6 +16,7 @@ function App() {
           <Route path="/todo" element={<AllTodo />} />
         </Route>
         <Route path="*" element={<Registr />} />
+        {/* <Route path="*" element={<AllTodo />} /> */}
       </Routes>
     </div>
   );

@@ -7,6 +7,7 @@ import previousEditReducer from "./reducers/previousEditReducer";
 import previousEditSlice from "./slices/previousEditSlice";
 import addSlice from "./slices/addSlice";
 import addReducer from "./reducers/addReducer";
+import { toDoApi } from "../../apiRQuery";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,8 @@ export const store = configureStore({
     editReducer: editReducer,
     tasksSlice: tasksSlice,
     tasksReducer: tasksReducer,
+    [toDoApi.reducerPath]: toDoApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(toDoApi.middleware),
 });

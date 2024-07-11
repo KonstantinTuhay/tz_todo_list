@@ -1,23 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const headers = {
-  Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
+  // Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
 };
 
-const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_URL }),
-  endpoints: (builder) => ({
-    getTasks: builder.query({
-      query: () => "/todos",
-      transformResponse: (response) => console.log(response), // Преобразование ответа
-      onSuccess: (data) => console.log("Запрос успешен!", data), // Обработка успешного ответа
-      onError: (error) => console.error("Произошла ошибка:", error), // Обработка ошибки
-      providesTags: ["Tasks"], // Теги для кэширования
-    }),
-  }),
-});
+// const api = createApi({
+//   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_URL }),
+//   endpoints: (builder) => ({
+//     getTasks: builder.query({
+//       query: () => "/todos",
+//       transformResponse: (response) => console.log(response), // Преобразование ответа
+//       onSuccess: (data) => console.log("Запрос успешен!", data), // Обработка успешного ответа
+//       onError: (error) => console.error("Произошла ошибка:", error), // Обработка ошибки
+//       providesTags: ["Tasks"], // Теги для кэширования
+//     }),
+//   }),
+// });
 
-export const { useGetTasksQuery } = api;
+// export const { useGetTasksQuery } = api;
 
 export const toDoApi = createApi({
   reducerPath: "toDoApi",
@@ -29,17 +30,21 @@ export const toDoApi = createApi({
     getToDos: builder.query({
       query: () => {
         return {
-          url: `todos?isCompleted=false`,
+          url: `/todos?isCompleted=true`,
           method: "GET",
           headers,
         };
       },
+      transformResponse: (response) => response.tasks,
+      onSuccess: (data) => console.log("Запрос успешен!", data),
+      onError: (error) => console.error("Произошла ошибка:", error),
       providesTags: ["Todos"],
     }),
     createToDo: builder.mutation({
       query: (body) => {
+        console.log(body);
         return {
-          url: `todos`,
+          url: `/todos`,
           method: "POST",
           headers,
           body: body,
@@ -50,7 +55,7 @@ export const toDoApi = createApi({
     deleteToDo: builder.mutation({
       query: (id) => {
         return {
-          url: `todos/${id}`,
+          url: `/todos/${id}`,
           method: "DELETE",
           headers,
         };

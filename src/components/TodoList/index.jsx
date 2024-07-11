@@ -2,11 +2,12 @@ import React from "react";
 import Todo from "../Todo";
 import styles from "./index.module.css";
 import { useSelector } from "react-redux";
-import { useGetTasksQuery } from "../../api";
+import { useGetToDosQuery } from "../../apiRQuery.js";
 
 const TodoList = ({ todos, setTodos }) => {
-  // const { data: tasks, error, isLoading } = useGetTasksQuery();
-  const tasks = useSelector((state) => state.tasksSlice);
+  const { data: tasks, error, isLoading } = useGetToDosQuery();
+  console.log(tasks);
+  // const tasks = useSelector((state) => state.tasksSlice);
 
   // if (isLoading) {
   //   return <p>Loading...</p>;

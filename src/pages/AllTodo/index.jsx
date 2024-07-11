@@ -1,12 +1,12 @@
 import React from "react";
-import TodoForm from "../../components/TodoInput";
+import TodoInput from "../../components/TodoInput";
 import TodoList from "../../components/TodoList";
 import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 import "../../App.css";
 
 function AllTodo() {
-  const AddLogging = withLogger(TodoForm);
+  const AddLogging = withLogger(TodoInput);
 
   return (
     <div className="App">
