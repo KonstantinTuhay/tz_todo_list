@@ -23,7 +23,8 @@ const headers = {
 export const toDoApi = createApi({
   reducerPath: "toDoApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_URL,
+    // baseUrl: process.env.REACT_APP_URL,
+    baseUrl: "https://todo-redev.herokuapp.com/api",
   }),
   tagTypes: ["Todos"],
   endpoints: (builder) => ({
@@ -35,7 +36,7 @@ export const toDoApi = createApi({
           headers,
         };
       },
-      transformResponse: (response) => response.tasks,
+      transformResponse: (response) => response,
       onSuccess: (data) => console.log("Запрос успешен!", data),
       onError: (error) => console.error("Произошла ошибка:", error),
       providesTags: ["Todos"],
