@@ -68,7 +68,7 @@ export const toDoApi = createApi({
     }),
     updateTask: builder.mutation({
       query: ({ id, updatedTask }) => ({
-        url: `/todos/${id}`,
+        url: `/todos/${id}/isCompleted`,
         method: "PUT",
         body: updatedTask,
       }),
