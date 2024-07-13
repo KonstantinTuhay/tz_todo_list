@@ -14,7 +14,7 @@ function AllTodo() {
         <h1>Your Todo App</h1>
         <Info />
       </div>
-      <AddLogging title="Добавил таску:" />
+      <AddLogging note="Добавил таску:" />
 
       <TodoList />
     </div>

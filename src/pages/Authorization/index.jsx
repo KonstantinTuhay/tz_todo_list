@@ -4,12 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Input, Button } from "antd";
 import api from "../../api";
 import styles from "./index.module.css";
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { postDataAut } from "../../components/services/postDataAuth";
 
 const Authorization = () => {
   const navigate = useNavigate();
-  // const { postData } = postDataAut();
 
   const {
     handleSubmit,
@@ -18,44 +15,11 @@ const Authorization = () => {
     reset,
   } = useForm({ mode: "onBlur" });
 
-  // const headers = {
-  //   Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
-  // };
-
-  // const onSubmit = createApi({
-  //   reducerPath: "toDoApi",
-  //   baseQuery: fetchBaseQuery({
-  //     baseUrl: process.env.REACT_APP_URL,
-  //   }),
-  //   tagTypes: ["Auth"],
-  //   endpoints: (builder) => ({
-  //     postData: builder.mutation({
-  //       query: (dataUser) => {
-  //         console.log(dataUser);
-  //         navigate("/todo");
-  //         reset();
-
-  //         return {
-  //           url: "/auth/login",
-  //           method: "POST",
-  //           headers,
-  //           dataUser: dataUser,
-  //         };
-  //       },
-
-  //       invalidatesTags: ["Aut"],
-  //     }),
-  //   }),
-  // });
-
   const onSubmit = async (dataUser) => {
     try {
       const response = await api.post("/auth/login", dataUser);
       console.log(response);
-      // process.env.REACT_APP_TOKEN = localStorage.setItem(
-      //   "token",
-      //   response.data.token
-      // );
+
       localStorage.setItem("token", response.data.token);
       navigate("/todo");
 

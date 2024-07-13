@@ -1,11 +1,9 @@
 import React from "react";
 import Todo from "../Todo";
 import styles from "./index.module.css";
-import { useSelector } from "react-redux";
 import { useGetToDosQuery } from "../../apiRQuery.js";
-import { useUpdateTaskMutation } from "../../apiRQuery";
 
-const TodoList = ({ todos, setTodos }) => {
+const TodoList = () => {
   const { data: tasks, error, isLoading } = useGetToDosQuery();
   console.log(tasks);
   if (isLoading) {
@@ -20,7 +18,7 @@ const TodoList = ({ todos, setTodos }) => {
     <div className={styles.TodoList}>
       {tasks.length === 0 && <h2>Todo list is empty</h2>}
       {tasks.map((todo) => (
-        <Todo key={todo.id} todo={todo} setTodos={setTodos} todos={todos} />
+        <Todo key={todo.id} todo={todo} />
       ))}
     </div>
   );

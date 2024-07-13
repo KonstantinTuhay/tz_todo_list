@@ -1,14 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const headers = {
-  // Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
   Authorization: `Bearer ${localStorage.getItem("token")}`,
 };
 
 export const toDoApi = createApi({
   reducerPath: "toDoApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: process.env.REACT_APP_URL,
     baseUrl: "https://todo-redev.herokuapp.com/api",
   }),
   tagTypes: ["Todos"],
@@ -66,6 +64,9 @@ export const toDoApi = createApi({
         body: updatedTask,
         headers,
       }),
+      transformResponse: (response) => response,
+      onSuccess: (data) => console.log("Запрос успешен!", data),
+      onError: (error) => console.error("Произошла ошибка:", error),
       invalidatesTags: ["Todos"],
     }),
   }),

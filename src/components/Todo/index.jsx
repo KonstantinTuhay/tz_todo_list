@@ -6,7 +6,6 @@ import { RiAppleLine } from "react-icons/ri";
 import { MdDoneOutline } from "react-icons/md";
 import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
-import { removeTask, toggleTask, editChange } from "../redux/slices/taskSlice";
 import { editTask } from "../redux/slices/editSlices";
 import { previousEditTask } from "../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,7 +22,6 @@ const Todo = ({ todo }) => {
 
   const edit = useSelector((state) => state.editWithSlice);
   const previousEdit = useSelector((state) => state.previousEditSlice);
-  console.log(previousEdit);
   const dispatch = useDispatch();
 
   if (isLoading) {
@@ -47,13 +45,8 @@ const Todo = ({ todo }) => {
 
   const handleChange = async (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
-      console.log(previousEdit);
-      console.log(typeof previousEdit);
       teachMeUseHoc();
-      // const updatedTask = { ...todo, title: "" + previousEdit };
-      const updatedTask = { ...todo, title: previousEdit };
-      console.log(updatedTask);
-      // dispatch(editChange({ id, previousEdit }));
+      const updatedTask = { title: previousEdit };
       await isUpdatedTask({ id, updatedTask });
       dispatch(editTask(null));
     }
