@@ -8,7 +8,7 @@ const withLogger = (WrappedComponent) => {
         date.getMonth() + 1
       }.${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
-      console.log(`${stringDate} ${props.title} ${props.text || props.value}`);
+      console.log(`${stringDate} ${props.note} ${props.text || props.value}`);
     };
 
     return <WrappedComponent {...props} teachMeUseHoc={teachMeUseHoc} />;

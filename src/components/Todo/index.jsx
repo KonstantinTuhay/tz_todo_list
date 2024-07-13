@@ -48,8 +48,10 @@ const Todo = ({ todo }) => {
   const handleChange = async (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
       console.log(previousEdit);
+      console.log(typeof previousEdit);
       teachMeUseHoc();
-      const updatedTask = { ...todo, title: "" + previousEdit };
+      // const updatedTask = { ...todo, title: "" + previousEdit };
+      const updatedTask = { ...todo, title: previousEdit };
       console.log(updatedTask);
       // dispatch(editChange({ id, previousEdit }));
       await isUpdatedTask({ id, updatedTask });
@@ -69,7 +71,7 @@ const Todo = ({ todo }) => {
             onChange={(e) => {
               dispatch(previousEditTask(e.target.value));
             }}
-            title="Изменил таску:"
+            note="Изменил таску:"
           />
         </div>
       ) : (
@@ -89,7 +91,7 @@ const Todo = ({ todo }) => {
             className={styles.deleteImage}
             id={todo.id}
             text={todo.title}
-            title="Удалил таску:"
+            note="Удалил таску:"
             deleteTodo={deleteTodo}
           />
 
