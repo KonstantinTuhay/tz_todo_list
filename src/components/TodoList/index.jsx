@@ -3,12 +3,10 @@ import Todo from "../Todo";
 import styles from "./index.module.css";
 import { useSelector } from "react-redux";
 import { useGetToDosQuery } from "../../apiRQuery.js";
+import { useUpdateTaskMutation } from "../../apiRQuery";
 
 const TodoList = ({ todos, setTodos }) => {
   const { data: tasks, error, isLoading } = useGetToDosQuery();
-  // const { data: tasks } = useGetToDosQuery();
-  console.log(tasks);
-  // const tasks = useSelector((state) => state.tasksSlice);
 
   if (isLoading) {
     return <p>Loading...</p>;

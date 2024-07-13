@@ -14,7 +14,6 @@ import { useDeleteToDoMutation } from "../../apiRQuery";
 import { useUpdateTaskMutation } from "../../apiRQuery";
 
 const Todo = ({ todo }) => {
-  console.log(todo);
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
   const [deleteTask] = useDeleteToDoMutation();
@@ -27,24 +26,13 @@ const Todo = ({ todo }) => {
   const deleteTodo = async (id, teachMeUseHoc) => {
     await deleteTask(id);
     teachMeUseHoc();
-    // dispatch(removeTask(id));
   };
 
-  // const deleteTodo = (id, teachMeUseHoc) => {
-  //   console.log(todo);
-  //   teachMeUseHoc();
-  //   dispatch(removeTask(id));
-  // };
-
-  // const toggleTodo = (id) => {
-  //   dispatch(toggleTask(id));
-  // };
   const toggleTodo = async (id) => {
     console.log("23123");
-    const updatedTask = { ...todo, isCompleted: true };
+    const updatedTask = { ...todo, isCompleted: !todo.isCompleted };
     console.log(updatedTask);
     await updateTask({ id, updatedTask });
-    // dispatch(toggleTask(id));
   };
 
   const editTodo = (id, text) => {
@@ -54,7 +42,6 @@ const Todo = ({ todo }) => {
 
   const handleChange = (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
-      console.log(event);
       teachMeUseHoc();
       dispatch(editChange({ id, previousEdit }));
       dispatch(editTask(null));

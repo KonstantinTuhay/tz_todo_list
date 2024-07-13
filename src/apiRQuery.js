@@ -5,21 +5,6 @@ const headers = {
   Authorization: `Bearer ${localStorage.getItem("token")}`,
 };
 
-// const api = createApi({
-//   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_URL }),
-//   endpoints: (builder) => ({
-//     getTasks: builder.query({
-//       query: () => "/todos",
-//       transformResponse: (response) => console.log(response), // Преобразование ответа
-//       onSuccess: (data) => console.log("Запрос успешен!", data), // Обработка успешного ответа
-//       onError: (error) => console.error("Произошла ошибка:", error), // Обработка ошибки
-//       providesTags: ["Tasks"], // Теги для кэширования
-//     }),
-//   }),
-// });
-
-// export const { useGetTasksQuery } = api;
-
 export const toDoApi = createApi({
   reducerPath: "toDoApi",
   baseQuery: fetchBaseQuery({
@@ -31,7 +16,7 @@ export const toDoApi = createApi({
     getToDos: builder.query({
       query: () => {
         return {
-          url: `/todos?isCompleted=false`,
+          url: `/todos`,
           method: "GET",
           headers,
         };
@@ -69,9 +54,11 @@ export const toDoApi = createApi({
     updateTask: builder.mutation({
       query: ({ id, updatedTask }) => ({
         url: `/todos/${id}/isCompleted`,
-        method: "PUT",
+        method: "PATCH",
         body: updatedTask,
+        headers,
       }),
+      invalidatesTags: ["Todos"],
     }),
   }),
 });
