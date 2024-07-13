@@ -34,7 +34,6 @@ export const toDoApi = createApi({
           method: "POST",
           headers,
           body: body,
-          // body: { id: crypto.randomUUID(), title: body, isCompleted: false },
         };
       },
       invalidatesTags: ["Todos"],
@@ -51,9 +50,18 @@ export const toDoApi = createApi({
       transformResponse: (response, meta, arg) => response.data,
       transformErrorResponse: (response, meta, arg) => response.status,
     }),
-    updateTask: builder.mutation({
-      query: ({ id, updatedTask }) => ({
+    isCompletedTask: builder.mutation({
+      query: ({ id, completedTask }) => ({
         url: `/todos/${id}/isCompleted`,
+        method: "PATCH",
+        body: completedTask,
+        headers,
+      }),
+      invalidatesTags: ["Todos"],
+    }),
+    isUpdatedTask: builder.mutation({
+      query: ({ id, updatedTask }) => ({
+        url: `/todos/${id}`,
         method: "PATCH",
         body: updatedTask,
         headers,
@@ -67,5 +75,6 @@ export const {
   useGetToDosQuery,
   useCreateToDoMutation,
   useDeleteToDoMutation,
-  useUpdateTaskMutation,
+  useIsCompletedTaskMutation,
+  useIsUpdatedTaskMutation,
 } = toDoApi;

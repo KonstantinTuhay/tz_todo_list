@@ -7,7 +7,7 @@ import { useUpdateTaskMutation } from "../../apiRQuery";
 
 const TodoList = ({ todos, setTodos }) => {
   const { data: tasks, error, isLoading } = useGetToDosQuery();
-
+  console.log(tasks);
   if (isLoading) {
     return <p>Loading...</p>;
   }

@@ -11,17 +11,24 @@ import { editTask } from "../redux/slices/editSlices";
 import { previousEditTask } from "../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useDeleteToDoMutation } from "../../apiRQuery";
-import { useUpdateTaskMutation } from "../../apiRQuery";
+import { useIsCompletedTaskMutation } from "../../apiRQuery";
+import { useIsUpdatedTaskMutation } from "../../apiRQuery";
 
 const Todo = ({ todo }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
   const EditLogging = withLogger(EditTodoLogger);
   const [deleteTask] = useDeleteToDoMutation();
-  const [updateTask] = useUpdateTaskMutation();
+  const [isCompletedTask] = useIsCompletedTaskMutation();
+  const [isUpdatedTask, { isLoading }] = useIsUpdatedTaskMutation();
 
   const edit = useSelector((state) => state.editWithSlice);
   const previousEdit = useSelector((state) => state.previousEditSlice);
+  console.log(previousEdit);
   const dispatch = useDispatch();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const deleteTodo = async (id, teachMeUseHoc) => {
     await deleteTask(id);
@@ -29,10 +36,8 @@ const Todo = ({ todo }) => {
   };
 
   const toggleTodo = async (id) => {
-    console.log("23123");
-    const updatedTask = { ...todo, isCompleted: !todo.isCompleted };
-    console.log(updatedTask);
-    await updateTask({ id, updatedTask });
+    const completedTask = { ...todo, isCompleted: !todo.isCompleted };
+    await isCompletedTask({ id, completedTask });
   };
 
   const editTodo = (id, text) => {
@@ -40,10 +45,14 @@ const Todo = ({ todo }) => {
     dispatch(previousEditTask(text));
   };
 
-  const handleChange = (event, id, teachMeUseHoc) => {
+  const handleChange = async (event, id, teachMeUseHoc) => {
     if (event.key === "Enter") {
+      console.log(previousEdit);
       teachMeUseHoc();
-      dispatch(editChange({ id, previousEdit }));
+      const updatedTask = { ...todo, title: "" + previousEdit };
+      console.log(updatedTask);
+      // dispatch(editChange({ id, previousEdit }));
+      await isUpdatedTask({ id, updatedTask });
       dispatch(editTask(null));
     }
   };
@@ -74,12 +83,12 @@ const Todo = ({ todo }) => {
 
           <CiEdit
             className={styles.editImage}
-            onClick={() => editTodo(todo.id, todo.text)}
+            onClick={() => editTodo(todo.id, todo.title)}
           />
           <DeleteLogging
             className={styles.deleteImage}
             id={todo.id}
-            text={todo.text}
+            text={todo.title}
             title="Удалил таску:"
             deleteTodo={deleteTodo}
           />

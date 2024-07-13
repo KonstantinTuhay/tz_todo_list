@@ -6,7 +6,6 @@ import { addTaskInput } from "../redux/slices/addSlice";
 import { useCreateToDoMutation } from "../../apiRQuery.js";
 
 const TodoForm = ({ teachMeUseHoc }) => {
-  // const [newTaskTitle, setNewTaskTitle] = useState("");
   const [createTask] = useCreateToDoMutation();
 
   const dispatch = useDispatch();
@@ -16,10 +15,7 @@ const TodoForm = ({ teachMeUseHoc }) => {
     const newTask = { title: add };
     if (event.key === "Enter") {
       console.log(typeof add);
-      // console.log(add);
-      // const newTask = add;
       teachMeUseHoc();
-      // setNewTaskTitle("");
       dispatch(addTask(add));
       await createTask(newTask);
       dispatch(addTaskInput(""));
@@ -36,10 +32,8 @@ const TodoForm = ({ teachMeUseHoc }) => {
       <input
         type="text"
         placeholder="Enter new todo"
-        // value={add}
         value={add}
         onChange={(event) => dispatch(addTaskInput(event.target.value))}
-        // onChange={(event) => setNewTaskTitle(event.target.value)}
         onKeyDown={(e) => handleChange(e)}
         ref={focusOnAddInput}
       />
