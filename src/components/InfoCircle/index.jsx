@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Modal, FloatButton } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { Switch } from "antd";
 
 const Info = () => {
-  // const [onTurn, setOnTurn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -25,7 +23,6 @@ const Info = () => {
         icon={<QuestionCircleOutlined />}
         type="default"
         onClick={showModal}
-        // style={{ right: 94 }}
       />
 
       <Modal
@@ -41,10 +38,6 @@ const Info = () => {
         </p>
         <p> Or you can turn on the feature with button "Add"</p>
         <p> We recommend you work with "Enter", because it's easy</p>
-        <p>
-          <Switch defaultChecked checked={() => {}} />
-          turn on feature
-        </p>
       </Modal>
     </>
   );
