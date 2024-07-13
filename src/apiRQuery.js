@@ -31,7 +31,7 @@ export const toDoApi = createApi({
     getToDos: builder.query({
       query: () => {
         return {
-          url: `/todos?isCompleted=true`,
+          url: `/todos?isCompleted=false`,
           method: "GET",
           headers,
         };
@@ -49,6 +49,7 @@ export const toDoApi = createApi({
           method: "POST",
           headers,
           body: body,
+          // body: { id: crypto.randomUUID(), title: body, isCompleted: false },
         };
       },
       invalidatesTags: ["Todos"],
@@ -65,6 +66,13 @@ export const toDoApi = createApi({
       transformResponse: (response, meta, arg) => response.data,
       transformErrorResponse: (response, meta, arg) => response.status,
     }),
+    updateTask: builder.mutation({
+      query: ({ id, updatedTask }) => ({
+        url: `/todos/${id}`,
+        method: "PUT",
+        body: updatedTask,
+      }),
+    }),
   }),
 });
 
@@ -72,4 +80,5 @@ export const {
   useGetToDosQuery,
   useCreateToDoMutation,
   useDeleteToDoMutation,
+  useUpdateTaskMutation,
 } = toDoApi;

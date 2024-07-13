@@ -13,15 +13,16 @@ const TodoForm = ({ teachMeUseHoc }) => {
   const add = useSelector((state) => state.addSlice);
 
   const handleChange = async (event) => {
+    const newTask = { title: add };
     if (event.key === "Enter") {
+      console.log(typeof add);
       // console.log(add);
       // const newTask = add;
       teachMeUseHoc();
       // setNewTaskTitle("");
       dispatch(addTask(add));
+      await createTask(newTask);
       dispatch(addTaskInput(""));
-      await createTask(add);
-      console.log(localStorage.getItem("token"));
     }
   };
 
