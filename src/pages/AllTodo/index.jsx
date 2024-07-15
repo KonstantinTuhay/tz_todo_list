@@ -5,7 +5,7 @@ import Info from "../../components/InfoCircle";
 import withLogger from "../../helpers/withLogger";
 import "../../App.css";
 
-function AllTodo() {
+const AllTodo = () => {
   const AddLogging = withLogger(TodoInput);
 
   return (
@@ -19,6 +19,6 @@ function AllTodo() {
       <TodoList />
     </div>
   );
-}
+};
 
 export default AllTodo;

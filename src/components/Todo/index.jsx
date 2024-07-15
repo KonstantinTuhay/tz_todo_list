@@ -9,9 +9,9 @@ import { CiEdit } from "react-icons/ci";
 import { editTask } from "../redux/slices/editSlices";
 import { previousEditTask } from "../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useDeleteToDoMutation } from "../../apiRQuery";
-import { useIsCompletedTaskMutation } from "../../apiRQuery";
-import { useIsUpdatedTaskMutation } from "../../apiRQuery";
+import { useDeleteToDoMutation } from "../redux/apiRQuery";
+import { useIsCompletedTaskMutation } from "../redux/apiRQuery";
+import { useIsUpdatedTaskMutation } from "../redux/apiRQuery";
 
 const Todo = ({ todo }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);

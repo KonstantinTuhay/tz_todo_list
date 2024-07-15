@@ -6,7 +6,7 @@ const initialState = null;
 
 const editReducer = createReducer(initialState, (builder) => {
   builder.addCase(editTask, (state, action) => {
-    return (state = action.payload);
+    state = action.payload;
   });
 });
 

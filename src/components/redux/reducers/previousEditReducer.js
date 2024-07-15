@@ -6,7 +6,7 @@ const initialState = "";
 
 const previousEditReducer = createReducer(initialState, (builder) => {
   builder.addCase(previousEditTask, (state, action) => {
-    return (state = action.payload);
+    state = action.payload;
   });
 });
 

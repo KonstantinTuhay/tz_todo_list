@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import { addTask } from "../redux/slices/taskSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { addTaskInput } from "../redux/slices/addSlice";
-import { useCreateToDoMutation } from "../../apiRQuery.js";
+import { useCreateToDoMutation } from "../redux/apiRQuery.js";
 
 const TodoForm = ({ teachMeUseHoc }) => {
   const [createTask] = useCreateToDoMutation();
@@ -14,7 +14,6 @@ const TodoForm = ({ teachMeUseHoc }) => {
   const handleChange = async (event) => {
     const newTask = { title: add };
     if (event.key === "Enter") {
-      console.log(typeof add);
       teachMeUseHoc();
       dispatch(addTask(add));
       await createTask(newTask);

@@ -25,7 +25,7 @@ const taskReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(removeTask, (state, action) => {
-      return state.filter((task) => task.id !== action.payload);
+      state.filter((task) => task.id !== action.payload);
     })
     .addCase(editChange, (state, action) => {
       const task = state.find((task) => task.id === action.payload.id);

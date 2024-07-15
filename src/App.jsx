@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Registr from "./pages/Registration";
 import Authorization from "./pages/Authorization";
 import PrivateRoute from "./components/PrivateRoute";
@@ -15,7 +15,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/todo" element={<AllTodo />} />
         </Route>
-        <Route path="*" element={<Registr />} />
+        <Route path="*" element={<Navigate to="/registr" />} />
       </Routes>
     </div>
   );

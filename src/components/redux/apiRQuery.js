@@ -7,7 +7,7 @@ const headers = {
 export const toDoApi = createApi({
   reducerPath: "toDoApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://todo-redev.herokuapp.com/api",
+    baseUrl: process.env.REACT_APP_URL,
   }),
   tagTypes: ["Todos"],
   endpoints: (builder) => ({

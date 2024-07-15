@@ -6,7 +6,7 @@ const initialState = "";
 
 const addReducer = createReducer(initialState, (builder) => {
   builder.addCase(addTaskInput, (state, action) => {
-    return (state = action.payload);
+    state = action.payload;
   });
 });
 

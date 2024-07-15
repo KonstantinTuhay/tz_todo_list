@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://todo-redev.herokuapp.com/api",
+  baseURL: process.env.REACT_APP_URL,
 });
 
 api.interceptors.request.use(

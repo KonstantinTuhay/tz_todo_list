@@ -140,7 +140,7 @@ const Registr = () => {
           >
             Register
           </Button>
-          <Link to="authorization">
+          <Link to="/authorization">
             <Button className={styles.btn} type="primary">
               Log In
             </Button>
