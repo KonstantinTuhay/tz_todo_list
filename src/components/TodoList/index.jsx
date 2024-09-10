@@ -1,7 +1,7 @@
 import React from "react";
 import Todo from "../Todo";
 import styles from "./index.module.css";
-import { useGetToDosQuery } from "../redux/apiRQuery.js";
+import { useGetToDosQuery } from "../../redux/apiRQuery.js";
 
 const TodoList = () => {
   const { data: tasks, error, isLoading } = useGetToDosQuery();

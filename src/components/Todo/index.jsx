@@ -6,12 +6,12 @@ import { RiAppleLine } from "react-icons/ri";
 import { MdDoneOutline } from "react-icons/md";
 import EditTodoLogger from "../EditTodoLogger";
 import { CiEdit } from "react-icons/ci";
-import { editTask } from "../redux/slices/editSlices";
-import { previousEditTask } from "../redux/slices/previousEditSlice";
+import { editTask } from "../../redux/slices/editSlices";
+import { previousEditTask } from "../../redux/slices/previousEditSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useDeleteToDoMutation } from "../redux/apiRQuery";
-import { useIsCompletedTaskMutation } from "../redux/apiRQuery";
-import { useIsUpdatedTaskMutation } from "../redux/apiRQuery";
+import { useDeleteToDoMutation } from "../../redux/apiRQuery";
+import { useIsCompletedTaskMutation } from "../../redux/apiRQuery";
+import { useIsUpdatedTaskMutation } from "../../redux/apiRQuery";
 
 const Todo = ({ todo }) => {
   const DeleteLogging = withLogger(DeleteTodoLogger);
